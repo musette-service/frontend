@@ -14,21 +14,16 @@ const BrowserView = {
         m("button.browse-up", {onclick: () => BrowserModel.travel('../')}, 'up')
       ]),
       m("nav.browser-items", BrowserModel.files.map((file, index) => {
-        return m('.browser-item', [
+        return m('.browser-item', {
+          class: file.items ? 'directory' : 'file'
+        }, [
           m('span.browser-item-name', {
             onclick: () => {
               if (file.items) BrowserModel.travel(file.path);
+              else Playlist.insert(BrowserModel.getFilePath(file.path));
             }
           }, file.path),
-          m('button.browser-item-add', {
-            onclick: () => {
-              if (file.items) {
-                //Playlist.insert(BrowserModel.getFilePath(file.path));
-              } else {
-                Playlist.insert(BrowserModel.getFilePath(file.path));
-              }
-            }
-          }, '+')
+          file.items ?  m('button.browser-item-add', '+') : null
         ]);
       }))
     ]);
