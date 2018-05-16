@@ -27,6 +27,7 @@ const Playlist = {
     });
   },
   _insert: (item, pos=Playlist.items.length) => {
+    if (item.track) item.track = parseInt(item.track);
     Playlist.items.splice(pos, 0, item);
   },
   set: (index=0) => {
@@ -36,6 +37,13 @@ const Playlist = {
   },
   next: () => {
     Playlist.set(Playlist.current_index+1);
+  },
+  sort: (by) => {
+    Playlist.items.sort((a, b) => {
+      if (a[by] < b[by]) return -1;
+      if (a[by] > b[by]) return 1;
+      return 0;
+    });
   }
 };
 

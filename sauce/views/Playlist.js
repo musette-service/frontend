@@ -8,10 +8,10 @@ const PlaylistView = {
       m("table", [
         m("thead", [
           m("tr", [
-            m("th", {className: "track"}, "Track"),
-            m("th", {className: "title"}, "Title"),
-            m("th", {className: "artist"}, "Artist"),
-            m("th", {className: "album"}, "Album")
+            m("th", {className: "track",  onclick: () => Playlist.sort("track") }, "Track"),
+            m("th", {className: "title",  onclick: () => Playlist.sort("title") }, "Title"),
+            m("th", {className: "artist", onclick: () => Playlist.sort("artist") }, "Artist"),
+            m("th", {className: "album",  onclick: () => Playlist.sort("album") }, "Album")
           ])
         ]),
         m("tbody", Playlist.items.map((item, index) => {
