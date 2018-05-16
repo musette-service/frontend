@@ -10,8 +10,8 @@ const BrowserView = {
   view: vnode => {
     return m("section.browser", [
       m("section.browser-controls", [
-        m("a.browse-home", {onclick: () => BrowserModel.travel('/')}, 'home'),
-        m("a.browse-up", {onclick: () => BrowserModel.travel('../')}, 'up')
+        m("button.browse-home", {onclick: () => BrowserModel.travel('/')}, 'home'),
+        m("button.browse-up", {onclick: () => BrowserModel.travel('../')}, 'up')
       ]),
       m("nav.browser-items", BrowserModel.files.map((file, index) => {
         return m('.browser-item', [
