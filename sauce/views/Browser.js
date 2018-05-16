@@ -17,12 +17,16 @@ const BrowserView = {
         return m('.browser-item', [
           m('span.browser-item-name', {
             onclick: () => {
-              if (file.directory) BrowserModel.travel(file.name);
+              if (file.items) BrowserModel.travel(file.path);
             }
-          }, file.name),
+          }, file.path),
           m('button.browser-item-add', {
             onclick: () => {
-              Playlist.insert(BrowserModel.getFilePath(file.name));
+              if (file.items) {
+                //Playlist.insert(BrowserModel.getFilePath(file.path));
+              } else {
+                Playlist.insert(BrowserModel.getFilePath(file.path));
+              }
             }
           }, '+')
         ]);

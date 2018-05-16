@@ -36,8 +36,14 @@ const BrowserModel = {
       withCredentials: true
     })
     .then(data => {
+      let files = data.filter(obj => !obj.items);
+      let dirs  = data.filter(obj => obj.items);
+
+      dirs.sort((a, b) => a.path.localeCompare(b.path));
+      files.sort((a, b) => a.path.localeCompare(b.path));
+
       BrowserModel.current_path = abs_path;
-      BrowserModel.files = data;
+      BrowserModel.files = dirs.concat(files);
       m.route.set("/player"+abs_path);
     })
     .catch(err => {
