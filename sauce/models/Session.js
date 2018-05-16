@@ -29,6 +29,9 @@ const Playlist = {
   _insert: (item, pos=Playlist.items.length) => {
     if (item.track) item.track = parseInt(item.track);
     Playlist.items.splice(pos, 0, item);
+    if (Playlist.current_index < 0 || Playlist.current_index >= Playlist.items.length) {
+      Playlist.set(pos);
+    }
   },
   set: (index=0) => {
     if (index < 0 || index >= Playlist.items.length) return;
