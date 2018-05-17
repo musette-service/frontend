@@ -1,9 +1,11 @@
 'use strict';
 
-import { PlayerView } from './views/Player.js';
+import { FullModeView } from './views/FullMode.js';
+import { PlayerModeView } from './views/PlayerMode.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-  m.route(document.body, '/player/', {
-    '/player/:dir_path...': PlayerView
+  m.route(document.body, '/f/', {
+    '/f/:dir_path...': FullModeView,
+    '/p/:dir_path...': PlayerModeView
   });
 });
