@@ -1,10 +1,15 @@
 :root {
   --primary-fg: #0a0409;
   --primary: #dbc;
+  --primary-light-fg: #0b050a;
+  --primary-light: #ecd;
+  --primary-dark-fg: #090308;
+  --primary-dark: #cab;
   --secondary: #fde;
   --secondary-fg: #0a0409;
   --font-family: 'IBM Plex Sans Condensed', sans-serif;
   --font-size: 14pt;
+  --font-size: 1.5vw;
 }
 * {
   box-sizing: border-box;
@@ -35,10 +40,10 @@ section.left {
   padding: .5em 0 .5em .5em;
 }
 section.right {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  padding: .5em .5em .5em 0;
+  padding: .5em 0;
 }
 
 /* Browser */
@@ -46,8 +51,8 @@ section.browser {
   display: flex;
   background-color: var(--primary);
   flex-direction: column;
-  flex: 1;
   width: 100%;
+  min-width: 100%;
   padding: .5em;
 }
 nav.browser-items {
@@ -148,8 +153,8 @@ tr {
 }
 
 tr:nth-child(even) {
-  color: var(--primary);
-  background-color: var(--primary-fg);
+  color: var(--primary-dark-fg);
+  background-color: var(--primary-dark);
 }
 
 tr.playing {
