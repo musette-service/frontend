@@ -38,7 +38,7 @@ section.right {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: .5em;
+  padding: .5em .5em .5em 0;
 }
 
 /* Browser */
@@ -97,7 +97,11 @@ use, path, ellipse {
 
 /* Controller */
 section.controller {
+  flex: 1;
+  max-height: 200px;
   display: flex;
+  margin: 0 .5em;
+  background: var(--primary);
 }
 section.controller-controls {
 }
@@ -105,9 +109,23 @@ section.controller-playbar {
   flex: 1;
 }
 
+section.audio-info {
+  display: flex;
+}
+
+.audio-info-image {
+  height: 100%;
+  flex: 1;
+}
+.audio-info-text {
+  padding: .5em;
+}
+
 /* Playlist */
 section.playlist {
+  flex: 1;
   padding: .5em;
+  margin: .5em .5em 0 .5em;
   background-color: var(--secondary);
   overflow: auto;
 }

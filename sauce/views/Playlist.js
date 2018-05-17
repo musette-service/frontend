@@ -15,20 +15,15 @@ const PlaylistView = {
           ])
         ]),
         m("tbody", Playlist.items.map((item, index) => {
-          return m('tr', {class: index == Playlist.current_index ? 'playing' : '', onclick: () => {Playlist.set(index)}}, [
+          return m('tr', {class: index == PlayerModel.current_index ? 'playing' : '', onclick: () => {PlayerModel.set(index)}}, [
             m('td', item.track),
-            m('td', item.title || item.filename),
+            m('td', item.title || item.filename.substring(item.filename.lastIndexOf('/')+1)),
             m('td', item.artist),
             m('td', item.album)
           ])
         }))
       ])
     ])
-    return m("section.playlist", [
-      m("nav.playlist-files", Playlist.items.map((item, index) => {
-        return m('a', {onclick: () => {PlayerModel.play(item.filename)}}, item.tags.title || item.filename);
-      }))
-    ]);
   }
 };
 

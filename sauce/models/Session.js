@@ -38,6 +38,10 @@ const Playlist = {
     Playlist.current_index = index;
     Playlist.current_item = Playlist.items[Playlist.current_index];
   },
+  get: (index=current_index) => {
+    if (index < 0 || index >= Playlist.items.length) return null;
+    return Playlist.items[index];
+  },
   next: () => {
     Playlist.set(Playlist.current_index+1);
   },
