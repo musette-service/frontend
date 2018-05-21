@@ -45,7 +45,13 @@ const ControllerView = {
           m(BytesizeIcon, { onclick: PlayerModel.forward, class: 'forwards' } ),
           m(BytesizeIcon, { onclick: PlayerModel.next, class: 'end' } )
         ]),
-        m("input.audio-volume[type='range']")
+        m("input.audio-volume[type='range']", {
+          min: 0, max: 100,
+          onchange: e => {
+            PlayerModel.volume(e.target.value/100);
+          },
+          value: PlayerModel.audio.volume*100
+        })
       ])
     ]);
   }

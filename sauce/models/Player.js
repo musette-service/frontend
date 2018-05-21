@@ -10,6 +10,7 @@ const PlayerModel = {
   audio: null,
   setup: () => {
     let audio = document.createElement('audio');
+    audio.volume = 0.5;
     audio.setAttribute('preload', 'metadata');
     audio.onended = () => {
       PlayerModel.next();
