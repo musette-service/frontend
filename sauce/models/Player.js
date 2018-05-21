@@ -19,7 +19,7 @@ const PlayerModel = {
   },
   load: () => {
     console.log('load');
-    PlayerModel.audio.src = 'api/play'+PlayerModel.current_item.filename;
+    PlayerModel.audio.src = 'api/play/'+PlayerModel.current_item.filename;
   },
   play: () => {
     console.log('playin');

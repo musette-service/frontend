@@ -1,4 +1,4 @@
-import { Session } from '../models/Session.js';
+import { Session, Playlist } from '../models/Session.js';
 import { PlayerModel } from '../models/Player.js';
 import { BytesizeIcon } from './BytesizeIcon.js';
 
@@ -20,9 +20,9 @@ const ControllerView = {
     return m("section.controller", [
       m("section.audio-info", [
         m("img.audio-info-image", { 
-          src: PlayerModel.current_item.APIC
+          src: PlayerModel.current_item.picture
           ?
-            'data:' + PlayerModel.current_item.APIC.data.format + ';base64,' + _arrayBufferToBase64(PlayerModel.current_item.APIC.data.data)
+            'data:' + Session.art_cache[PlayerModel.current_item.picture].format + ';base64,' + _arrayBufferToBase64(Session.art_cache[PlayerModel.current_item.picture].data)
           :
             ''
         }),

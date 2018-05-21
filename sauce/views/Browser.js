@@ -15,11 +15,13 @@ const BrowserView = {
         m(BytesizeIcon, { onclick: () => { BrowserModel.travel('../') }, class: 'chevron-top'}),
         m(BytesizeIcon, {
           onclick: () => {
+            let targets = [];
             for (let i = 0; i < BrowserModel.selected_files.length; i++) {
               if (BrowserModel.selected_files[i]) {
-                Playlist.insert(BrowserModel.getFilePath(BrowserModel.files[i].path));
+                targets.push(BrowserModel.files[i].path);
               }
             }
+            Playlist.insert(BrowserModel.getFilePath(), targets);
             BrowserModel.clearSelected();
           }, class: 'plus', style: 'float:right'
         })

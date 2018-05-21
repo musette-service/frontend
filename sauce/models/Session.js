@@ -1,25 +1,27 @@
 'use strict';
 
 const Session = {
+  art_cache: {}
 };
 
 const Playlist = {
   current_index: -1,
   current_item: '',
   items: [],
-  insert: (file, pos=Playlist.items.length) => {
+  insert: (base_path, files, pos=Playlist.items.length) => {
+    if (!Array.isArray(files)) files = [files];
     m.request({
       method: 'GET',
-      url: '/api/info'+file,
-      withCredentials: true
+      url: '/api/info'+base_path,
+      withCredentials: true,
+      data: {files: files, art: Object.keys(Session.art_cache) }
     })
     .then(data => {
-      if (Array.isArray(data)) {
-        for (let i = 0; i < data.length; i++) {
-          Playlist._insert(Object.assign({filename: file}, data[i]));
-        }
-      } else {
-        Playlist._insert(Object.assign({filename: file}, data));
+      for (const key of Object.keys(data.art)) {
+        Session.art_cache[key] = data.art[key];
+      }
+      for (let i = 0; i < data.tracks.length; i++) {
+        Playlist._insert(data.tracks[i]);
       }
     })
     .catch(err => {
