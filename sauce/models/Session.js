@@ -44,6 +44,7 @@ const Playlist = {
     if (index < 0 || index >= Playlist.items.length) return;
     Playlist.items[index] = item;
     if (item.track) item.track = parseInt(item.track);
+    if (!item.title) item.title = item.filename.substring(item.filename.lastIndexOf('/')+1);
     if (Playlist.current_index < 0 || Playlist.current_index >= Playlist.items.length) {
       Playlist.set(index);
     }

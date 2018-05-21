@@ -8,15 +8,23 @@ const PlayerModel = {
   current_item: { album: '', artist: '', title: '', src: '' },
   current_index: -1,
   audio: null,
+  progress_element: null,
   setup: () => {
     let audio = document.createElement('audio');
     audio.volume = 0.5;
     audio.setAttribute('preload', 'metadata');
+    audio.ondurationchange = () => {
+      if (PlayerModel.progress_element) PlayerModel.progress_element.max = audio.duration;
+    }
     audio.onended = () => {
       PlayerModel.next();
       m.redraw();
     };
-
+    audio.ontimeupdate = () => {
+      if (PlayerModel.progress_element) {
+        PlayerModel.progress_element.value = audio.currentTime;
+      }
+    };
     PlayerModel.audio = audio;
   },
   load: () => {
@@ -67,6 +75,9 @@ const PlayerModel = {
   },
   volume: (val=0.5) => {
     PlayerModel.audio.volume = val;
+  },
+  setProgressElement: (element) => {
+    PlayerModel.progress_element = element;
   }
 };
 

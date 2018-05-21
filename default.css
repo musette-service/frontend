@@ -7,6 +7,7 @@
   --primary-dark: #b9a;
   --secondary: #fde;
   --secondary-fg: #0a0409;
+  --tertiary: #def;
   --font-family: 'IBM Plex Sans Condensed', sans-serif;
   --font-size: 14pt;
   --font-size: 1.5vw;
@@ -92,6 +93,7 @@ nav.browser-items {
 .selected {
   background-color: var(--primary-dark);
   color: var(--primary-dark-fg);
+  animation: 3s ease 0s infinite alternate selection-glow;
 }
 
 svg {
@@ -129,13 +131,27 @@ section.audio-info {
 .audio-info-text {
   padding: .5em;
 }
+.audio-info-title {
+  font-size: 125%;
+}
+progress {
+  background-color: var(--primary-dark);
+  border: 0;
+}
+progress::-webkit-progress-bar {
+  background-color: var(--primary-dark);
+}
+progress::-webkit-progress-value {
+  background-color: var(--tertiary);
+}
+progress::-moz-progress-bar { /* progress meter/value */
+  background-color: var(--tertiary);
+}
 
 /* Playlist */
 section.playlist {
   flex: 1;
-  padding: .5em;
   margin: .5em .5em 0 .5em;
-  background-color: var(--secondary);
   overflow: auto;
 }
 
@@ -143,12 +159,12 @@ table {
   table-layout: fixed;
   width: 100%;
   white-space: nowrap;
+  border-spacing: 0;
 }
 td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;
   padding: .25em;
 }
 
@@ -163,8 +179,8 @@ tr {
 }
 
 tr:nth-child(even) {
-  color: var(--primary-dark-fg);
-  background-color: var(--primary-dark);
+  color: var(--primary-light-fg);
+  background-color: var(--primary-light);
 }
 
 tr.loading {
@@ -226,4 +242,16 @@ button.stop {
 button.pause {
 }
 button.play {
+}
+
+/* animations */
+@keyframes selection-glow {
+  from { 
+    border: 1px solid var(--tertiary);
+    box-shadow: inset 0px 0px 0px var(--tertiary);
+  }
+  to { 
+    border: 1px solid var(--tertiary);
+    box-shadow: inset 0px 0px 6px var(--tertiary);
+  }
 }

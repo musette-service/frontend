@@ -26,12 +26,19 @@ const ControllerView = {
           :
             ''
         }),
-        m("span.audio-info-text", [
-          m("span.audio-info-artist", PlayerModel.current_item.artist),
-          m("span.audio-info-album", PlayerModel.current_item.album),
-          m("span.audio-info-title", PlayerModel.current_item.title)
+        m(".audio-info-text", [
+          m(".audio-info-title", PlayerModel.current_item.title),
+          m(".audio-info-album", PlayerModel.current_item.album),
+          m(".audio-info-artist", PlayerModel.current_item.artist)
         ]),
-        m("progress.audio-info-progress"),
+        m("progress.audio-info-progress", {
+          oncreate: (vnode) => {
+            // We keep track of this directly so we don't call m.redraw for every update
+            PlayerModel.setProgressElement(vnode.dom);
+          },
+          value: PlayerModel.audio.currentTime||0,
+          max: PlayerModel.audio.duration||0
+        }),
       ]),
       m("section.audio-controller", [
         m("button.shuffle"),

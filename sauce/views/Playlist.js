@@ -10,8 +10,8 @@ const PlaylistView = {
           m("tr", [
             m("th", {className: "track",  onclick: () => Playlist.sort("track") }, "Track"),
             m("th", {className: "title",  onclick: () => Playlist.sort("title") }, "Title"),
-            m("th", {className: "artist", onclick: () => Playlist.sort("artist") }, "Artist"),
-            m("th", {className: "album",  onclick: () => Playlist.sort("album") }, "Album")
+            m("th", {className: "album",  onclick: () => Playlist.sort("album") }, "Album"),
+            m("th", {className: "artist", onclick: () => Playlist.sort("artist") }, "Artist")
           ])
         ]),
         m("tbody", Playlist.items.map((item, index) => {
@@ -36,9 +36,9 @@ const PlaylistView = {
             }
           }, [
             m('td', item.track),
-            m('td', item.title || item.filename.substring(item.filename.lastIndexOf('/')+1)),
-            m('td', item.artist),
-            m('td', item.album)
+            m('td', item.title),
+            m('td', item.album),
+            m('td', item.artist)
           ])
         }))
       ])
