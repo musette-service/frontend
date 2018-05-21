@@ -26,7 +26,8 @@ function pathJoin(parts, sep){
 
 const BrowserModel = {
   files: [],
-  selected_files: [],
+  checked_files: [],
+  last_selected: -1,
   current_path: '/',
   travel: (path) => {
     if (path == '/') BrowserModel.current_path = '/';
@@ -45,7 +46,7 @@ const BrowserModel = {
 
       BrowserModel.current_path = abs_path;
       BrowserModel.files = dirs.concat(files);
-      BrowserModel.clearSelected();
+      BrowserModel.clearChecked();
       m.route.set("/f"+abs_path);
     })
     .catch(err => {
@@ -55,16 +56,16 @@ const BrowserModel = {
   getFilePath: (file) => {
     return absolute('', pathJoin([BrowserModel.current_path, file]));
   },
-  clearSelected: () => {
-    BrowserModel.selected_files = [];
+  clearChecked: () => {
+    BrowserModel.checked_files = [];
   },
-  toggleSelection: (index) => {
+  toggleChecked: (index) => {
     if (index < 0 || index >= BrowserModel.files.length) return;
-    BrowserModel.selected_files[index] = !BrowserModel.selected_files[index] ? true : false;
+    BrowserModel.checked_files[index] = !BrowserModel.checked_files[index] ? true : false;
   },
-  isSelected: (index) => {
-    if (index < 0 || index >= BrowserModel.selected_files.length) return false;
-    return BrowserModel.selected_files[index] ? true : false;
+  isChecked: (index) => {
+    if (index < 0 || index >= BrowserModel.checked_files.length) return false;
+    return BrowserModel.checked_files[index] ? true : false;
   }
 };
 

@@ -16,31 +16,42 @@ const BrowserView = {
         m(BytesizeIcon, {
           onclick: () => {
             let targets = [];
-            for (let i = 0; i < BrowserModel.selected_files.length; i++) {
-              if (BrowserModel.selected_files[i]) {
+            for (let i = 0; i < BrowserModel.checked_files.length; i++) {
+              if (BrowserModel.checked_files[i]) {
                 targets.push(BrowserModel.files[i].path);
               }
             }
             Playlist.insert(BrowserModel.getFilePath(), targets);
-            BrowserModel.clearSelected();
+            BrowserModel.clearChecked();
           }, class: 'plus', style: 'float:right'
         })
       ]),
       m("nav.browser-items", BrowserModel.files.map((file, index) => {
         return m('.browser-item', {
-          class: file.items ? 'directory' : 'file'
+          class: (file.items ? 'directory' : 'file') + (BrowserModel.last_selected == index ? ' selected' : '')
         }, [
           m(BytesizeIcon, { class: file.items ? 'folder' : 'music' }),
           m('span.browser-item-name', {
-            onclick: () => {
-              if (file.items) BrowserModel.travel(file.path);
-              else BrowserModel.toggleSelection(index);
+            onclick: (e) => {
+              if (e.shiftKey) {
+                const start   = Math.min(BrowserModel.last_selected, index);
+                const end     = Math.max(BrowserModel.last_selected, index) + 1;
+                for (let i = start; i != end; i++) {
+                  BrowserModel.toggleChecked(i);
+                }
+              } else {
+                if (BrowserModel.last_selected == index) {
+                  if (file.items) BrowserModel.travel(file.path);
+                  else BrowserModel.toggleChecked(index);
+                }
+                BrowserModel.last_selected = index;
+              }
             },
           },
           file.path),
           m(BytesizeIcon, { 
-            class: BrowserModel.isSelected(index) ? 'checkmark' : file.items ? 'plus' : '',
-            onclick: () => { BrowserModel.toggleSelection(index) }
+            class: BrowserModel.isChecked(index) ? 'checkmark' : file.items ? 'plus' : '',
+            onclick: () => { BrowserModel.toggleChecked(index) }
           })
         ]);
       }))

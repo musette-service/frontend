@@ -4,7 +4,7 @@
   --primary-light-fg: #0b050a;
   --primary-light: #ecd;
   --primary-dark-fg: #090308;
-  --primary-dark: #cab;
+  --primary-dark: #b9a;
   --secondary: #fde;
   --secondary-fg: #0a0409;
   --font-family: 'IBM Plex Sans Condensed', sans-serif;
@@ -65,7 +65,7 @@ nav.browser-items {
   display: flex;
   align-items: center;
   box-shadow: 0px 1px 0px var(--primary-fg);
-  margin: 4px 0;
+  padding: 4px 2px;
   transition: transform .1s, box-shadow .1s;
 }
 .browser-item:hover {
@@ -88,6 +88,10 @@ nav.browser-items {
 }
 .file {
   font-weight: light;
+}
+.selected {
+  background-color: var(--primary-dark);
+  color: var(--primary-dark-fg);
 }
 
 svg {
