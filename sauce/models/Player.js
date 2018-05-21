@@ -14,6 +14,7 @@ const PlayerModel = {
     audio.setAttribute('preload', 'metadata');
     audio.onended = () => {
       PlayerModel.next();
+      m.redraw();
     };
 
     PlayerModel.audio = audio;
