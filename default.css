@@ -157,6 +157,10 @@ tr:nth-child(even) {
   background-color: var(--primary-dark);
 }
 
+tr.loading {
+  pointer-events: none;
+  opacity: 0.25;
+}
 tr.playing {
   font-weight: bold;
   box-shadow: inset 0px 0px 2px var(--primary-fg);

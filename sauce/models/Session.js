@@ -10,6 +10,12 @@ const Playlist = {
   items: [],
   insert: (base_path, files, pos=Playlist.items.length) => {
     if (!Array.isArray(files)) files = [files];
+
+    let to_update = [];
+    files.forEach((k, i) => {
+      to_update[i] = Playlist._insert({filename: k, loading: true});
+    });
+
     m.request({
       method: 'GET',
       url: '/api/info'+base_path,
@@ -21,7 +27,7 @@ const Playlist = {
         Session.art_cache[key] = data.art[key];
       }
       for (let i = 0; i < data.tracks.length; i++) {
-        Playlist._insert(data.tracks[i]);
+        Playlist._update(to_update[i], data.tracks[i]);
       }
     })
     .catch(err => {
@@ -29,10 +35,15 @@ const Playlist = {
     });
   },
   _insert: (item, pos=Playlist.items.length) => {
-    if (item.track) item.track = parseInt(item.track);
     Playlist.items.splice(pos, 0, item);
+    return pos;
+  },
+  _update: (index, item) => {
+    if (index < 0 || index >= Playlist.items.length) return;
+    Playlist.items[index] = item;
+    if (item.track) item.track = parseInt(item.track);
     if (Playlist.current_index < 0 || Playlist.current_index >= Playlist.items.length) {
-      Playlist.set(pos);
+      Playlist.set(index);
     }
   },
   set: (index=0) => {

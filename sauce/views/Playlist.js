@@ -15,7 +15,9 @@ const PlaylistView = {
           ])
         ]),
         m("tbody", Playlist.items.map((item, index) => {
-          return m('tr', {class: index == PlayerModel.current_index ? 'playing' : '', onclick: () => {PlayerModel.set(index)}}, [
+          return m('tr', {
+            class: (item.loading ? 'loading' : '') + (index == PlayerModel.current_index ? ' playing' : ''), onclick: () => {PlayerModel.set(index)}
+          }, [
             m('td', item.track),
             m('td', item.title || item.filename.substring(item.filename.lastIndexOf('/')+1)),
             m('td', item.artist),
