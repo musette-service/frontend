@@ -8,6 +8,8 @@ const Playlist = {
   current_index: -1,
   current_item: '',
   items: [],
+  selected_items: [],
+  last_selected: -1,
   insert: (base_path, files, pos=Playlist.items.length) => {
     if (!Array.isArray(files)) files = [files];
 
@@ -64,6 +66,12 @@ const Playlist = {
       if (a[by] > b[by]) return 1;
       return 0;
     });
+  },
+  select: (index) => {
+    Playlist.selected_items[index] = true;
+  },
+  clearSelection: () => {
+    Playlist.selected_items = [];
   }
 };
 
