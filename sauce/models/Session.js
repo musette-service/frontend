@@ -14,7 +14,7 @@ const Playlist = {
       method: 'GET',
       url: '/api/info'+base_path,
       withCredentials: true,
-      data: {files: files, art: Object.keys(Session.art_cache) }
+      data: {tracks: files, art: Object.keys(Session.art_cache) }
     })
     .then(data => {
       for (const key of Object.keys(data.art)) {
