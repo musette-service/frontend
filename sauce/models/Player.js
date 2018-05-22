@@ -1,6 +1,7 @@
 'use strict';
 
 import { Playlist, Session } from './Session.js';
+import { Title } from '../App.js';
 
 const PlayerModel = {
   current_file: '',
@@ -25,14 +26,20 @@ const PlayerModel = {
         PlayerModel.progress_element.value = audio.currentTime;
       }
     };
+    audio.onplaying = () => {
+      Title.setPre('🎶');
+    };
+    audio.onpause = () => {
+      Title.setPre('');
+    };
     PlayerModel.audio = audio;
   },
   load: () => {
     console.log('load');
+    Title.set(PlayerModel.current_item.title + ' - ' + PlayerModel.current_item.album + ' - ' + PlayerModel.current_item.artist);
     PlayerModel.audio.src = 'api/play/'+PlayerModel.current_item.filename;
   },
   play: () => {
-    console.log('playin');
     PlayerModel.audio.play();
   },
   pause: () => {
@@ -45,7 +52,6 @@ const PlayerModel = {
   set: (index) => {
     console.log('attempting to set to ' + index);
     PlayerModel.current_item  = Playlist.get(index);
-    console.log(PlayerModel.current_item);
     if (!PlayerModel.current_item) {
       PlayerModel.current_item = PlayerModel.null_item;
       PlayerModel.current_index = -1;
