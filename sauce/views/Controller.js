@@ -46,9 +46,10 @@ const ControllerView = {
         m(".audio-buttons", [
           m(BytesizeIcon, { onclick: PlayerModel.previous, class: 'start' } ),
           m(BytesizeIcon, { onclick: PlayerModel.rewind, class: 'backwards' } ),
-          m(BytesizeIcon, { onclick: PlayerModel.stop, class: 'pause' } ),
-          m(BytesizeIcon, { onclick: PlayerModel.play, class: 'play' } ),
-          m("button.play-pause", { onclick: () => { PlayerModel.audio.paused ? PlayerModel.play() : PlayerModel.pause() } }, "p" ),
+          m(BytesizeIcon, { 
+            onclick: PlayerModel.audio.paused ? PlayerModel.play : PlayerModel.pause,
+            class: PlayerModel.audio.paused ? 'play' : 'pause',
+          } ),
           m(BytesizeIcon, { onclick: PlayerModel.forward, class: 'forwards' } ),
           m(BytesizeIcon, { onclick: PlayerModel.next, class: 'end' } )
         ]),
