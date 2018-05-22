@@ -12,25 +12,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const Title = {
   app_name: 'Musette',
-  last_pre_title: '',
   pre_title: '',
-  last_title: '',
-  title: '',
-  set: (text) => {
-    Title.last_title = Title.title;
-    Title.title = text;
+  title_parts: [],
+  set: (parts) => {
+    Title.title_parts = parts;
     Title.sync();
   },
   setPre: (text) => {
-    Title.last_pre_title = Title.pre_title;
     Title.pre_title = text;
     Title.sync();
   },
   sync: () => {
     document.title
       = (Title.pre_title ? Title.pre_title+' ' : '')
-      + (Title.title ? Title.title+' ' : '')
-      + (Title.app_name ? '∵ ' + Title.app_name : '');
+      + Title.title_parts.filter((k) => { if (k) return k; }).join(' - ')
+      + (Title.app_name ? ' ∵ ' + Title.app_name : '');
   }
 };
 Title.sync();

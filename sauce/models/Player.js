@@ -36,7 +36,7 @@ const PlayerModel = {
   },
   load: () => {
     console.log('load');
-    Title.set(PlayerModel.current_item.title + ' - ' + PlayerModel.current_item.album + ' - ' + PlayerModel.current_item.artist);
+    Title.set([PlayerModel.current_item.title, PlayerModel.current_item.album, PlayerModel.current_item.artist]);
     PlayerModel.audio.src = 'api/play/'+PlayerModel.current_item.filename;
   },
   play: () => {
