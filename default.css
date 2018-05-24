@@ -1,11 +1,13 @@
 :root {
   --primary-fg: #0a0409;
-  --primary: #dbc;
+  --primary: #fc4b89;
   --primary-light-fg: #0b050a;
-  --primary-light: #ecd;
-  --primary-dark-fg: #090308;
+  --primary-light: #ff6aa3;
+  --primary-dark-fg: #dd2770;
   --primary-dark: #b9a;
-  --secondary: #fde;
+  --secondary: #622e70;
+  --secondary-dark: #491657;
+  --secondary-light: #7c468a;
   --secondary-fg: #0a0409;
   --tertiary: #def;
   --font-family: 'IBM Plex Sans Condensed', sans-serif;
@@ -91,7 +93,7 @@ nav.browser-items {
   font-weight: light;
 }
 .selected {
-  background-color: var(--primary-dark);
+  background-color: var(--secondary-light);
   color: var(--primary-dark-fg);
   animation: 3s ease 0s infinite alternate selection-glow;
 }
@@ -125,6 +127,20 @@ section.audio-info {
   height: 30vh;
   min-height: 150px;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+img.audio-info-background {
+  position: absolute;
+  margin-top: -25%;
+  margin-left: 25%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  filter: blur(5px);
+  opacity: 0.25;
+  z-index: -100;
 }
 
 section.audio-info-album {
@@ -136,13 +152,17 @@ section.audio-info-album {
 }
 
 section.controller use, section.controller ellipse {
-  stroke: white;
+  stroke: var(--secondary-light);
+  white;
   stroke-width: .25em;
   fill: none;
 }
 
 section.audio-info-album:hover .audio-info-progress {
   height: 1.5vh;
+}
+section.audio-info:hover .audio-info-album-play {
+  opacity: 1.0;
 }
 
 .audio-info-album-play {
@@ -153,6 +173,8 @@ section.audio-info-album:hover .audio-info-progress {
   height: 50%;
   margin-left: -25%;
   margin-top: -25%;
+  transition: opacity .2s;
+  opacity: 0.0;
 }
 .audio-info-album-play svg {
   width: 100%;
@@ -166,6 +188,7 @@ section.audio-info-album:hover .audio-info-progress {
 }
 .audio-info-text {
   padding: .5em;
+  text-shadow: 0 0 8px var(--secondary-light);
 }
 .audio-info-title {
   font-size: 125%;
@@ -294,11 +317,9 @@ button.play {
 /* animations */
 @keyframes selection-glow {
   from { 
-    border: 1px solid var(--tertiary);
-    box-shadow: inset 0px 0px 0px var(--tertiary);
+    box-shadow: inset 0px 0px 0px var(--primary-dark);
   }
   to { 
-    border: 1px solid var(--tertiary);
-    box-shadow: inset 0px 0px 6px var(--tertiary);
+    box-shadow: inset 0px 0px 6px var(--primary-dark);
   }
 }

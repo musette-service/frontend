@@ -19,6 +19,13 @@ const ControllerView = {
   view: () => {
     return m("section.controller", [
       m("section.audio-info", [
+        m("img.audio-info-background", { 
+          src: PlayerModel.current_item.picture
+          ?
+            'data:' + Session.art_cache[PlayerModel.current_item.picture].format + ';base64,' + _arrayBufferToBase64(Session.art_cache[PlayerModel.current_item.picture].data)
+          :
+            ''
+        }),
         m("section.audio-info-album", [
           m("img.audio-info-image", { 
             src: PlayerModel.current_item.picture
