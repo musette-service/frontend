@@ -11,8 +11,8 @@ const BrowserView = {
   view: vnode => {
     return m("section.browser", [
       m("section.browser-controls", [
-        m(BytesizeIcon, { onclick: () => { BrowserModel.travel('/'); }, class: 'home' }),
-        m(BytesizeIcon, { onclick: () => { BrowserModel.travel('../') }, class: 'chevron-top'}),
+        m(BytesizeIcon, { onclick: () => { BrowserModel.travel('/'); }, type: 'home' }),
+        m(BytesizeIcon, { onclick: () => { BrowserModel.travel('../') }, type: 'chevron-top'}),
         m(BytesizeIcon, {
           onclick: () => {
             let targets = [];
@@ -23,14 +23,14 @@ const BrowserView = {
             }
             Playlist.insert(BrowserModel.getFilePath(), targets);
             BrowserModel.clearChecked();
-          }, class: 'plus', style: 'float:right'
+          }, type: 'plus', style: 'float:right'
         })
       ]),
       m("nav.browser-items", BrowserModel.files.map((file, index) => {
         return m('.browser-item', {
           class: (file.items ? 'directory' : 'file') + (BrowserModel.last_selected == index ? ' selected' : '')
         }, [
-          m(BytesizeIcon, { class: file.items ? 'folder' : 'music' }),
+          m(BytesizeIcon, { type: file.items ? 'folder' : 'music' }),
           m('span.browser-item-name', {
             onclick: (e) => {
               if (e.shiftKey) {
@@ -50,7 +50,7 @@ const BrowserView = {
           },
           file.path),
           m(BytesizeIcon, { 
-            class: BrowserModel.isChecked(index) ? 'checkmark' : file.items ? 'plus' : '',
+            type: BrowserModel.isChecked(index) ? 'checkmark' : file.items ? 'plus' : '',
             onclick: () => { BrowserModel.toggleChecked(index) }
           })
         ]);

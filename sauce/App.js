@@ -8,6 +8,8 @@ window.addEventListener('DOMContentLoaded', () => {
     '/f/:dir_path...': FullModeView,
     '/p/:dir_path...': PlayerModeView
   });
+  // Disallow text selection (this is to allow for shift+clicking without selecting ranges of text. Might be better to hook it directly on those elements, if possible?)
+  document.onselectstart = () => { return false; };
 });
 
 const Title = {

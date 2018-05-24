@@ -99,6 +99,7 @@ nav.browser-items {
 svg {
   width: 16px;
   height: 16px;
+  fill: currentColor;
 }
 use, path, ellipse {
   stroke: black;
@@ -108,11 +109,10 @@ use, path, ellipse {
 
 /* Controller */
 section.controller {
-  flex: 1;
-  max-height: 200px;
-  display: flex;
+  height: 30vh;
+  min-height: 150px;
   margin: 0 .5em;
-  background: var(--primary);
+  color: var(--primary);
 }
 section.controller-controls {
 }
@@ -122,10 +122,46 @@ section.controller-playbar {
 
 section.audio-info {
   display: flex;
+  height: 30vh;
+  min-height: 150px;
+  align-items: center;
+}
+
+section.audio-info-album {
+  position: relative;
+  width: 30vh;
+  height: 30vh;
+  min-width: 150px;
+  min-height: 150px;
+}
+
+section.controller use, section.controller ellipse {
+  stroke: white;
+  stroke-width: .25em;
+  fill: none;
+}
+
+section.audio-info-album:hover .audio-info-progress {
+  height: 1.5vh;
+}
+
+.audio-info-album-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  height: 50%;
+  margin-left: -25%;
+  margin-top: -25%;
+}
+.audio-info-album-play svg {
+  width: 100%;
+  height: 100%;
 }
 
 .audio-info-image {
   height: 100%;
+  max-width: 100%;
   flex: 1;
 }
 .audio-info-text {
@@ -134,24 +170,35 @@ section.audio-info {
 .audio-info-title {
   font-size: 125%;
 }
+.audio-info-progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  min-height: 2px;
+  height: 0.5vh;
+  transition: height .2s;
+}
 progress {
-  background-color: var(--primary-dark);
-  border: 0;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 progress::-webkit-progress-bar {
-  background-color: var(--primary-dark);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 progress::-webkit-progress-value {
-  background-color: var(--tertiary);
+  background-color: rgba(255, 255, 255, 0.75);
 }
 progress::-moz-progress-bar { /* progress meter/value */
-  background-color: var(--tertiary);
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
 /* Playlist */
 section.playlist {
   flex: 1;
   margin: .5em .5em 0 .5em;
+  display: flex;
+}
+
+section.playlist-table-container {
   overflow: auto;
 }
 
