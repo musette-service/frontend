@@ -69,13 +69,10 @@ nav.browser-items {
   cursor: pointer;
   display: flex;
   align-items: center;
-  box-shadow: 0px 1px 0px var(--primary-fg);
   padding: 4px 2px;
-  transition: transform .1s, box-shadow .1s;
 }
 .browser-item:hover {
   transform: translateY(-1px);
-  box-shadow: 0px 2px 0px var(--primary-fg);
 }
 .browser-item-name {
   overflow: hidden;
@@ -96,7 +93,6 @@ nav.browser-items {
 }
 .selected {
   color: var(--secondary);
-  animation: 3s ease 0s infinite alternate selection-glow;
 }
 
 svg {
@@ -265,10 +261,8 @@ tr.loading {
 }
 tr.playing {
   font-weight: bold;
-  box-shadow: inset 0px 0px 2px var(--primary-fg);
 }
 tr:nth-child(event).playing {
-  box-shadow: inset 0px 0px 2px var(--primary);
 }
 
 th.track {
@@ -318,14 +312,4 @@ button.stop {
 button.pause {
 }
 button.play {
-}
-
-/* animations */
-@keyframes selection-glow {
-  from { 
-    box-shadow: inset 0px 0px 2px var(--secondary);
-  }
-  to { 
-    box-shadow: inset 0px 0px 6px var(--secondary);
-  }
 }
