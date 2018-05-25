@@ -41,19 +41,20 @@ section.container {
 section.left {
   width: 30%;
   display: flex;
-  padding: .5em 0 .5em .5em;
+  padding: 1em 0 1em 1em;
 }
 section.right {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: .5em 0;
+  padding: 1em 0;
 }
 
 /* Browser */
 section.browser {
   display: flex;
   background-color: rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 16px black;
   color: var(--primary);
   flex-direction: column;
   width: 100%;
@@ -110,9 +111,10 @@ use, path, ellipse {
 section.controller {
   height: 30vh;
   min-height: 150px;
-  margin: 0 .5em;
+  margin: 0 1em;
   color: var(--primary);
   background-color: rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 16px black;
 }
 section.controller-controls {
 }
@@ -133,7 +135,6 @@ section.audio-info {
 img.audio-info-background {
   position: absolute;
   margin-top: -25%;
-  margin-left: 25%;
   top: 0;
   left: 0;
   width: 100%;
@@ -216,9 +217,10 @@ progress::-moz-progress-bar { /* progress meter/value */
 /* Playlist */
 section.playlist {
   flex: 1;
-  margin: .5em .5em 0 .5em;
+  margin: 1em 1em 0 1em;
   display: flex;
   background-color: rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 16px black;
 }
 
 section.playlist-table-container {
