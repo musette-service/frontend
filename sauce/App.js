@@ -1,10 +1,12 @@
 'use strict';
 
+import { SplashView } from './views/Splash.js';
 import { FullModeView } from './views/FullMode.js';
 import { PlayerModeView } from './views/PlayerMode.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-  m.route(document.body, '/f/', {
+  m.route(document.body, '/splash', {
+    '/splash': SplashView,
     '/f/:dir_path...': FullModeView,
     '/p/:dir_path...': PlayerModeView
   });
