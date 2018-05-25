@@ -7,7 +7,7 @@ const SplashView = {
           e.target.classList.add("fadein");
           setTimeout(() => {
             m.route.set("/f/", {}, { replace: true });
-          }, 1000);
+          }, 500);
         }
       })
     ]);
@@ -15,7 +15,7 @@ const SplashView = {
   onbeforeremove: (vnode) => {
     vnode.dom.classList.add("fadeout");
     return new Promise((resolve) => {
-      setTimeout(resolve, 1000);
+      setTimeout(resolve, 500);
     });
   }
 };

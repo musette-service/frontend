@@ -52,6 +52,7 @@ section.container {
   height: 100%;
   display: flex;
   background: linear-gradient(var(--primary), var(--secondary));
+  transition: opacity 1s;
 }
 
 section.left {
@@ -334,11 +335,11 @@ button.play {
 
 /* */
 .fadeout {
-  transition: opacity 1s;
+  transition: opacity .5s;
   opacity: 0.0;
 }
 .fadein {
-  transition: opacity 1s;
+  transition: opacity .5s;
   opacity: 1.0;
 }
 
