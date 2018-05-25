@@ -16,6 +16,7 @@
 }
 * {
   box-sizing: border-box;
+  touch-action: manipulation; /* Stops double tap to zoom in iOS 11.3 */
 }
 html {
   width: 100%;
