@@ -102,7 +102,6 @@ nav.browser-items {
 .browser-item-add {
 }
 .directory, .file {
-  flex: 1;
 }
 .directory {
 }
@@ -113,15 +112,9 @@ nav.browser-items {
   color: var(--secondary);
 }
 
-svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-use, path, ellipse {
-  stroke: var(--secondary);
-  stroke-width: 3px;
-  fill: none;
+.micon {
+  font-size: 150%;
+  color: var(--secondary-light);
 }
 
 /* Controller */
@@ -279,14 +272,14 @@ tr.loading td.title {
   pointer-events: none;
   opacity: 0.25;
 }
-tr.playing {
+tr.playing td.track, tr.playing td.title, tr.playing td.album, tr.playing td.artist {
   font-weight: bold;
 }
 tr:nth-child(event).playing {
 }
 
 th.status {
-  width: 3%;
+  width: 4%;
 }
 th.track {
   width: 5%;
@@ -298,7 +291,7 @@ th.artist {
   width: 20%;
 }
 th.album {
-  width: 32%;
+  width: 31%;
 }
 
 audio.player {
@@ -307,10 +300,6 @@ audio.player {
 }
 audio::-webkit-media-controls-panel {
   background-color: var(--primary);
-}
-
-.micon {
-  color: var(--secondary-light);
 }
 
 /* */

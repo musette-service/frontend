@@ -53,6 +53,11 @@ const BrowserModel = {
       alert(err);
     });
   },
+  getFileExt: (file) => {
+    let ext = file.lastIndexOf('.');
+    if (!ext) return ""
+    return file.substring(ext+1);
+  },
   getFilePath: (file) => {
     return absolute('', pathJoin([BrowserModel.current_path, file]));
   },

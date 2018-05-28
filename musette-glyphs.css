@@ -131,8 +131,64 @@
   padding: 0.1em;
   content: attr(data-content);
 }
+.micon.tag::after {
+  display: block;
+  position: absolute;
+  bottom: 15%;
+  right: 0%;
+  text-align: center;
+  width: 100%; height: 100%;
+  content: attr(data-content);
+  text-shadow: -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111, 1px 1px 0 #111;  
+}
 
-.micon[data-content=".mp3"]::after {
+.micon.file-oga::after, .micon[data-content="oga"]::after {
+  content: '\00e040';
+}
+.micon.file-ogg::after, .micon[data-content="ogg"]::after {
+  content: '\00e041';
+}
+.micon.file-ogm::after, .micon[data-content="ogm"]::after {
+  content: '\00e042';
+}
+.micon.file-ogv::after, .micon[data-content="ogv"]::after {
+  content: '\00e043';
+}
+.micon.file-ogx::after, .micon[data-content="ogx"]::after {
+  content: '\00e044';
+}
+.micon.file-opus::after, .micon[data-content="opus"]::after {
+  content: '\00e045';
+}
+.micon.file-spx::after, .micon[data-content="spx"]::after {
+  content: '\00e046';
+}
+.micon.file-flac::after, .micon[data-content="flac"]::after {
+  content: '\00e047';
+}
+.micon.file-webm::after, .micon[data-content="webm"]::after {
+  content: '\00e048';
+}
+.micon.file-3gp::after, .micon[data-content="3gp"]::after {
+  content: '\00e049';
+}
+.micon.file-mp3::after, .micon[data-content="mp3"]::after {
+  content: '\00e04a';
+}
+.micon.file-mp4::after, .micon[data-content="mp4"]::after {
+  content: '\00e04b';
+}
+.micon.file-m4a::after, .micon[data-content="m4a"]::after {
+  content: '\00e04c';
+}
+.micon.file-aac::after, .micon[data-content="aac"]::after {
+  content: '\00e04d';
+}
+.micon.file-wav::after, .micon[data-content="wav"]::after {
+  content: '\00e04e';
+}
+.micon.file-wave::after, .micon[data-content="wave"]::after {
+  content: '\00e04f';
 }
 
 .micon.rotate::before {

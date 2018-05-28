@@ -29,7 +29,9 @@ const BrowserView = {
         return m('.browser-item', {
           class: (file.items ? 'directory' : 'file') + (BrowserModel.last_selected == index ? ' selected' : '')
         }, [
-          m('.micon.' + (file.items ? 'folder' : 'note')),
+          m('.micon.' + (file.items ? 'folder' : 'file.tag'), {
+            "data-content": BrowserModel.getFileExt(file.path)
+          }),
           m('span.browser-item-name', {
             onclick: (e) => {
               if (e.shiftKey) {
