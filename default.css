@@ -159,13 +159,9 @@ section.audio-info-album {
   height: 30vh;
   min-width: 150px;
   min-height: 150px;
-}
-
-section.controller use, section.controller ellipse {
-  stroke: var(--secondary-light);
-  white;
-  stroke-width: .25em;
-  fill: none;
+  display: flex;
+  align-items: center;
+  background: black;
 }
 
 section.audio-info-album:hover .audio-info-progress {
@@ -182,6 +178,7 @@ section.audio-info:hover .audio-info-album-play {
   width: 50%;
   height: 50%;
   font-size: 15vh;
+  text-shadow: -.01em -.01em 0 #111, .01em -.01em 0 #111, -.01em .01em 0 #111, .01em .01em 0 #111;  
   margin-left: -25%;
   margin-top: -25%;
   transition: opacity .2s;
@@ -193,7 +190,6 @@ section.audio-info:hover .audio-info-album-play {
 }
 
 .audio-info-image {
-  height: 100%;
   max-width: 100%;
   flex: 1;
 }

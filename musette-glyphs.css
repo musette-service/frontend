@@ -139,7 +139,7 @@
   text-align: center;
   width: 100%; height: 100%;
   content: attr(data-content);
-  text-shadow: -1px -1px 0 #111, 1px -1px 0 #111, -1px 1px 0 #111, 1px 1px 0 #111;  
+  text-shadow: -.025em -.025em 0 #111, .025em -.025em 0 #111, -.025em .025em 0 #111, .025em .025em 0 #111;  
 }
 
 .micon.file-oga::after, .micon[data-content="oga"]::after {
