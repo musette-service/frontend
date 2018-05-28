@@ -9,6 +9,7 @@ const PlaylistView = {
         m("table", [
           m("thead", [
             m("tr", [
+              m("th", {className: "status"}, ""),
               m("th", {className: "track",  onclick: () => Playlist.sort("track") }, "Track"),
               m("th", {className: "title",  onclick: () => Playlist.sort("title") }, "Title"),
               m("th", {className: "album",  onclick: () => Playlist.sort("album") }, "Album"),
@@ -35,10 +36,11 @@ const PlaylistView = {
                 }
               }
             }, [
-              m('td', item.track),
-              m('td', item.title),
-              m('td', item.album),
-              m('td', item.artist)
+              m('td', m('.micon.'+(item.loading ? 'loading.reverse.flipV.rotate' : index == PlayerModel.current_index ? 'note' : ''))),
+              m('td.track', item.track),
+              m('td.title', item.title || item.filename),
+              m('td.album', item.album),
+              m('td.artist', item.artist)
             ])
           }))
         ])

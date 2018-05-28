@@ -1,0 +1,173 @@
+@font-face {
+  font-family: "Musette Glyphs";
+  src: url(musette-glyphs.ttf);
+}
+
+.micon {
+  position: relative;
+  display: inline-block;
+  min-width: 1em; min-height: 1em;
+  font-family: "Musette Glyphs";
+  line-height: 1;
+}
+.micon::before {
+  position: absolute;
+  left: 0; top: 0;
+  display: block;
+  width: 100%; height: 100%;
+} 
+.micon::after {
+  position: absolute;
+  display: block;
+}
+
+.micon.musette::before {
+  content: '\00e000';
+}
+.micon.play::before {
+  content: '\00e001';
+}
+.micon.pause::before {
+  content: '\00e002';
+}
+.micon.stop::before {
+  content: '\00e003';
+}
+.micon.rewind::before {
+  content: '\00e004';
+}
+.micon.forward::before {
+  content: '\00e005';
+}
+.micon.previous::before {
+  content: '\00e006';
+}
+.micon.next::before {
+  content: '\00e007';
+}
+.micon.volume0::before {
+  content: '\00e008';
+}
+.micon.volume33::before {
+  content: '\00e009';
+}
+.micon.volume66::before {
+  content: '\00e00a';
+}
+.micon.volume100::before {
+  content: '\00e00b';
+}
+.micon.volumemuted::before {
+  content: '\00e00c';
+}
+
+.micon.loading::before {
+  content: '\00e010';
+}
+.micon.info::before {
+  content: '\00e011';
+}
+.micon.warning::before {
+  content: '\00e012';
+}
+.micon.error::before {
+  content: '\00e013';
+}
+.micon.settings::before {
+  content: '\00e014';
+}
+.micon.settings-alt::before {
+  content: '\00e015';
+}
+
+.micon.home::before {
+  content: '\00e020';
+}
+.micon.note::before {
+  content: '\00e021';
+}
+.micon.file::before {
+  content: '\00e022';
+}
+.micon.folder::before {
+  content: '\00e023';
+}
+.micon.folder-open::before {
+  content: '\00e024';
+}
+.micon.add::before {
+  content: '\00e025';
+}
+.micon.remove::before {
+  content: '\00e026';
+}
+.micon.up::before {
+  content: '\00e027';
+}
+.micon.unchecked::before {
+  content: '\00e028';
+}
+.micon.checked::before {
+  content: '\00e029';
+}
+
+.micon.sub::after {
+  display: block;
+  position: absolute;
+  bottom: 0; right: 0;
+  background: white;
+  border: black;
+  font-size: 30%;
+  padding: 0.1em;
+  content: attr(data-content);
+}
+.micon.sup::after {
+  display: block;
+  position: absolute;
+  top: 0; right: 0;
+  background: white;
+  border: black;
+  font-size: 30%;
+  padding: 0.1em;
+  content: attr(data-content);
+}
+
+.micon[data-content=".mp3"]::after {
+}
+
+.micon.rotate::before {
+  animation-duration: 2s;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.micon.reverse::before {
+  animation-direction: reverse;
+}
+
+.micon.flipH {
+  transform: scaleY(-1);
+}
+.micon.flipV {
+  transform: scaleX(-1);
+}
+
+.micon.slow::before {
+  animation-duration: 6s;
+}
+.micon.medium::before {
+  animation-duration: 3s;
+}
+.micon.fast::before {
+  animation-duration: 1s;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

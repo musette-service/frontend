@@ -188,6 +188,7 @@ section.audio-info:hover .audio-info-album-play {
   top: 50%;
   width: 50%;
   height: 50%;
+  font-size: 15vh;
   margin-left: -25%;
   margin-top: -25%;
   transition: opacity .2s;
@@ -219,10 +220,10 @@ section.audio-info:hover .audio-info-album-play {
   transition: height .2s;
 }
 progress {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(124, 70, 138, 0.25);
 }
 progress::-webkit-progress-bar {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(124, 70, 138, 0.25);
 }
 progress::-webkit-progress-value {
   background-color: rgba(255, 255, 255, 0.75);
@@ -274,7 +275,7 @@ tr:nth-child(even).selected {
   color: var(--secondary-light);
 }
 
-tr.loading {
+tr.loading td.title {
   pointer-events: none;
   opacity: 0.25;
 }
@@ -284,8 +285,11 @@ tr.playing {
 tr:nth-child(event).playing {
 }
 
+th.status {
+  width: 3%;
+}
 th.track {
-  width: 10%;
+  width: 5%;
 }
 th.title {
   width: 40%;
@@ -294,7 +298,7 @@ th.artist {
   width: 20%;
 }
 th.album {
-  width: 30%;
+  width: 32%;
 }
 
 audio.player {
@@ -305,32 +309,8 @@ audio::-webkit-media-controls-panel {
   background-color: var(--primary);
 }
 
-/* All Buttons */
-button {
-  border: 0;
-  background-color: var(--secondary);
-  padding: .25em;
-  margin: .25em;
-}
-button.browse-home {
-}
-button.browse-back {
-}
-button.browse-forward {
-}
-button.previous {
-}
-button.next {
-}
-button.rewind {
-}
-button.forward {
-}
-button.stop {
-}
-button.pause {
-}
-button.play {
+.micon {
+  color: var(--secondary-light);
 }
 
 /* */

@@ -1,6 +1,5 @@
 import { Session, Playlist } from '../models/Session.js';
 import { PlayerModel } from '../models/Player.js';
-import { BytesizeIcon } from './BytesizeIcon.js';
 
 function _arrayBufferToBase64( buffer ) {
   var binary = '';
@@ -42,10 +41,9 @@ const ControllerView = {
             value: PlayerModel.audio.currentTime||0,
             max: PlayerModel.audio.duration||0
           }),
-          m(BytesizeIcon, { 
+          m('.micon.' + (PlayerModel.audio.paused ? 'play' : 'pause'), {
             onclick: PlayerModel.audio.paused ? PlayerModel.play : PlayerModel.pause,
-            class: 'audio-info-album-play',
-            type: PlayerModel.audio.paused ? 'play' : 'pause'
+            class: 'audio-info-album-play'
           })
         ]),
         m(".audio-info-text", [
@@ -57,14 +55,13 @@ const ControllerView = {
           m("button.shuffle"),
           m("button.repeat"),
           m(".audio-buttons", [
-            m(BytesizeIcon, { onclick: PlayerModel.previous, type: 'start' } ),
-            m(BytesizeIcon, { onclick: PlayerModel.rewind, type: 'backwards' } ),
-            m(BytesizeIcon, { 
-              onclick: PlayerModel.audio.paused ? PlayerModel.play : PlayerModel.pause,
-              type: PlayerModel.audio.paused ? 'play' : 'pause',
+            m('.micon.previous', { onclick: PlayerModel.previous } ),
+            m('.micon.rewind', { onclick: PlayerModel.rewind } ),
+            m('.micon.' + (PlayerModel.audio.paused ? 'play' : 'pause'), { 
+              onclick: PlayerModel.audio.paused ? PlayerModel.play : PlayerModel.pause
             } ),
-            m(BytesizeIcon, { onclick: PlayerModel.forward, type: 'forwards' } ),
-            m(BytesizeIcon, { onclick: PlayerModel.next, type: 'end' } )
+            m('.micon.forward', { onclick: PlayerModel.forward } ),
+            m('.micon.next', { onclick: PlayerModel.next } )
           ]),
           m("input.audio-volume[type='range']", {
             min: 0, max: 100,
