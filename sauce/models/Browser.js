@@ -56,7 +56,7 @@ const BrowserModel = {
   getFileExt: (file) => {
     let ext = file.lastIndexOf('.');
     if (!ext) return ""
-    return file.substring(ext+1);
+    return file.substring(ext+1).toLowerCase();
   },
   getFilePath: (file) => {
     return absolute('', pathJoin([BrowserModel.current_path, file]));
