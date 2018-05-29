@@ -16,20 +16,21 @@ const ControllerView = {
     PlayerModel.setup();
   },
   view: () => {
+    let artwork = Playlist.art_cache[PlayerModel.current_item.picture];
     return m("section.controller", [
       m("section.audio-info", [
         m("img.audio-info-background", { 
-          src: PlayerModel.current_item.picture
+          src: artwork
           ?
-            'data:' + Session.art_cache[PlayerModel.current_item.picture].format + ';base64,' + _arrayBufferToBase64(Session.art_cache[PlayerModel.current_item.picture].data)
+            'data:' + artwork.format + ';base64,' + _arrayBufferToBase64(artwork.data)
           :
             ''
         }),
         m("section.audio-info-album", [
           m("img.audio-info-image", { 
-            src: PlayerModel.current_item.picture
+            src: artwork
             ?
-              'data:' + Session.art_cache[PlayerModel.current_item.picture].format + ';base64,' + _arrayBufferToBase64(Session.art_cache[PlayerModel.current_item.picture].data)
+              'data:' + artwork.format + ';base64,' + _arrayBufferToBase64(artwork.data)
             :
               ''
           }),
@@ -66,7 +67,7 @@ const ControllerView = {
           m("input.audio-volume[type='range']", {
             min: 0, max: 100,
             onchange: e => {
-              PlayerModel.volume(e.target.value/100);
+              PlayerModel.volume(parseInt(e.target.value)/100);
             },
             value: PlayerModel.audio.volume*100
           })
