@@ -2,7 +2,7 @@ const SplashView = {
   view: (vnode) => {
     return m('.splash', [
       m('img.fadeout', {
-        src: 'img/musette-512x512.png',
+        src: 'img/musette-1024x1024.png',
         onload: (e) => {
           e.target.classList.add("fadein");
           setTimeout(() => {

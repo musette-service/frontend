@@ -40,6 +40,8 @@ const PlayerModel = {
     PlayerModel.audio.src = 'api/play/'+PlayerModel.current_item.filename;
   },
   play: () => {
+    console.log('play');
+    console.dir(PlayerModel.audio);
     PlayerModel.audio.play();
   },
   pause: () => {

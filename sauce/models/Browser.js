@@ -47,7 +47,7 @@ const BrowserModel = {
       BrowserModel.current_path = abs_path;
       BrowserModel.files = dirs.concat(files);
       BrowserModel.clearChecked();
-      m.route.set("/f"+abs_path);
+      //m.route.set("/f"+abs_path);
     })
     .catch(err => {
       alert(err);
