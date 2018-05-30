@@ -84,6 +84,7 @@ const Playlist = {
   art_cache: {},
   items: Session.get('playlist.items') || [],
   selected_items: [],
+  checked_items: [],
   last_selected: -1,
   insert: (base_path, files, pos=Playlist.items.length) => {
     if (!Array.isArray(files)) files = [files];
@@ -144,11 +145,42 @@ const Playlist = {
       return 0;
     });
   },
+  removeItem: index => {
+    if (index < 0 || index >= Playlist.items.length) return false;
+    Playlist.items.splice(index, 1);
+    Playlist.checked_items.splice(index, 1);
+    return true;
+  },
   select: (index) => {
     Playlist.selected_items[index] = true;
   },
   clearSelection: () => {
     Playlist.selected_items = [];
+  },
+  isSelected: index => {
+    return Playlist.selected_items[index] ? true : false;
+  },
+  isChecked: index => {
+    return Playlist.checked_items[index] ? true : false;
+  },
+  toggleChecked: index => {
+    if (index < 0 || index >= Playlist.items.length) return;
+    Playlist.checked_items[index] = Playlist.checked_items[index] == true ? false : true;
+  },
+  check: index => {
+    if (index < 0 || index >= Playlist.items.length) return;
+    Playlist.checked_items[index] = true;
+  },
+  processChecked: type => {
+    if (type == 'remove') {
+      for (let i = 0; i <= Playlist.checked_items.length; i++) {
+        if (Playlist.checked_items[i] == true) {
+          if (Playlist.removeItem(i)) {
+            i--;
+          }
+        }
+      }
+    }
   }
 };
 

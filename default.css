@@ -246,71 +246,76 @@ progress::-moz-progress-bar { /* progress meter/value */
 
 /* Playlist */
 section.playlist {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   margin: 1em 1em 0 1em;
-  display: flex;
   background-color: rgba(0,0,0,0.7);
   box-shadow: 2px 2px 16px black;
 }
 
-section.playlist-table-container {
+.playlist-items {
+  flex: 1;
   overflow: auto;
 }
-
-table {
-  table-layout: fixed;
+.playlist-row {
+  color: var(--primary);
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-wrap: nowrap;
   width: 100%;
-  white-space: nowrap;
-  border-spacing: 0;
+  border-collapse: collapse;
+  cursor: pointer;
 }
-td {
-  white-space: nowrap;
+.playlist-row.selected {
+  color: var(--secondary);
+}
+
+.playlist-row-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  border-collapse: collapse;
+  overflow-y: scroll;
+}
+.playlist-row-header::-webkit-scrollbar {
+  visibility: hidden;
+}
+.playlist-cell {
+  flex-grow: 1;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  flex-basis: 1em;
   padding: .25em;
 }
 
-tr {
-  color: var(--primary);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-tr:nth-child(even) {
-  color: var(--primary-light);
-}
-tr:nth-child(even).selected {
-  color: var(--secondary-light);
-}
-
-tr.loading td.title {
+.playlist-row.loading .playlist-cell.title {
   pointer-events: none;
   opacity: 0.25;
 }
-tr.playing td.track, tr.playing td.title, tr.playing td.album, tr.playing td.artist {
+
+.playlist-row.playing .playlist-cell.track, .playlist-row.playing .playlist-cell.title, .playlist-row.playing .playlist-cell.album, .playlist-row.playing .playlist-cell.artist {
   font-weight: bold;
 }
-tr:nth-child(event).playing {
-}
 
-th.status {
-  width: 4%;
+.playlist-cell.status {
+  flex-basis: 1.5em;
+  flex-grow: 0;
 }
-th.track {
-  width: 5%;
+.playlist-cell.track {
+  flex-basis: 3em;
+  flex-grow: 0;
+  text-align: center;
 }
-th.title {
-  width: 40%;
+.playlist-cell.title {
+  flex-grow: 2;
 }
-th.artist {
-  width: 20%;
-}
-th.album {
-  width: 31%;
+.playlist-cell.checkbox {
+  flex-basis: 2em;
+  flex-grow: 0;
 }
 
 audio.player {

@@ -86,6 +86,9 @@ const PlayerModel = {
   },
   setProgressElement: (element) => {
     PlayerModel.progress_element = element;
+  },
+  isCurrent: index => {
+    return index == PlayerModel.current_index;
   }
 };
 
