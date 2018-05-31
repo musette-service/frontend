@@ -4,7 +4,7 @@
   "description": "Herein lies in-progress code for the client frontend for Musette, the remote music player.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run webpack",
+    "build": "npm run webpack",
     "webpack": "webpack -d"
   },
   "repository": {
