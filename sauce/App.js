@@ -1,6 +1,7 @@
 'use strict';
 
 import { SplashView } from './views/Splash.js';
+import { LoginView } from './views/Login.js';
 import { FullModeView } from './views/FullMode.js';
 import { PlayerModeView } from './views/PlayerMode.js';
 import { BrowserModeView } from './views/BrowserMode.js';
@@ -8,6 +9,7 @@ import { BrowserModeView } from './views/BrowserMode.js';
 window.addEventListener('DOMContentLoaded', () => {
   m.route(document.body, '/splash', {
     '/splash': SplashView,
+    '/l': LoginView,
     '/f/:dir_path...': FullModeView,
     '/p/:dir_path...': PlayerModeView,
     '/b/:dir_path...': BrowserModeView
@@ -37,6 +39,16 @@ const Title = {
 };
 Title.sync();
 
+let Log = function() {
+  Log.last = Array.prototype.slice.apply(arguments).join(' ');
+  Log.list.splice(0, 0, Log.last);
+  if (Log.list.length >= 50) {
+    Log.list.splice(Log.list.length-1, 1);
+  }
+  console.log(Log.last);
+};
+Log.last = '';
+Log.list = [];
 
 let _isMobile = null;
 function isMobile() {
@@ -55,5 +67,36 @@ function isMobile() {
   return _isMobile;
 }
 
+const Auth = {
+  login: (username, password) => {
+    m.request({
+      method: "POST",
+      data: {
+        username: username,
+        password: password
+      },
+      url: "/api/auth/login", 
+      withCredentials: true
+    })
+    .then(result => {
+      m.route.set("/splash/", {}, { replace: true });
+    })
+    .catch(e => {
+      Log(e.message);
+      console.dir(e);
+    });
+  }
+};
 
-export { Title, isMobile };
+const App = {
+  handleRequestError: error => {
+    if (error.status == 401) { // Login request
+      Log("Login required.");
+      m.route.set("/l/", {}, { replace: true });
+    } else {
+      Log(error.status+": " + error.message)
+    }
+  }
+};
+
+export { Title, Log, Auth, isMobile, App };

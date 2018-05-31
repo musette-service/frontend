@@ -1,6 +1,7 @@
 'use strict';
 
 import { Session } from './Session.js';
+import { App } from '../App.js';
 
 function absolute(base, relative) {
   var stack = base.split("/"),
@@ -49,9 +50,7 @@ const BrowserModel = {
       BrowserModel.clearChecked();
       //m.route.set("/f"+abs_path);
     })
-    .catch(err => {
-      alert(err);
-    });
+    .catch(App.handleRequestError);
   },
   getFileExt: (file) => {
     let ext = file.lastIndexOf('.');
