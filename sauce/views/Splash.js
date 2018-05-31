@@ -5,9 +5,14 @@ const SplashView = {
         src: 'img/musette-1024x1024.png',
         onload: (e) => {
           e.target.classList.add("fadein");
-          setTimeout(() => {
+          m.request({
+            method: "GET",
+            url: "/api/"
+          })
+          .then(result => {
+            console.log(result);
             m.route.set("/f/", {}, { replace: true });
-          }, 500);
+          });
         }
       })
     ]);
