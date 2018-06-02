@@ -34,6 +34,35 @@ const ControllerView = {
             :
               ''
           }),
+          m(".audio-info-controls", [
+            m('.micon.rewind', {
+              ontouchstart: e => {
+                e.preventDefault();
+              },
+              ontouchend: e => {
+                e.preventDefault();
+              },
+              onmousedown: e => {
+              },
+              onmouseup: e => {
+              }
+            }),
+            m('.micon.' + (PlayerModel.audio.paused ? 'play' : 'pause'), {
+              onclick: PlayerModel.audio.paused ? PlayerModel.play : PlayerModel.pause
+            }),
+            m('.micon.forward', {
+              ontouchstart: e => {
+                e.preventDefault();
+              },
+              ontouchend: e => {
+                e.preventDefault();
+              },
+              onmousedown: e => {
+              },
+              onmouseup: e => {
+              }
+            })
+          ]),
           m("progress.audio-info-progress", {
             oncreate: (vnode) => {
               // We keep track of this directly so we don't call m.redraw for every update
@@ -41,10 +70,6 @@ const ControllerView = {
             },
             value: PlayerModel.audio.currentTime||0,
             max: PlayerModel.audio.duration||0
-          }),
-          m('.micon.' + (PlayerModel.audio.paused ? 'play' : 'pause'), {
-            onclick: PlayerModel.audio.paused ? PlayerModel.play : PlayerModel.pause,
-            class: 'audio-info-album-play'
           })
         ]),
         m(".audio-info-text", [
@@ -53,24 +78,17 @@ const ControllerView = {
           m(".audio-info-artist", PlayerModel.current_item.artist)
         ]),
         m("section.audio-controller", [
-          m("button.shuffle"),
-          m("button.repeat"),
-          m(".audio-buttons", [
-            m('.micon.previous', { onclick: PlayerModel.previous } ),
-            m('.micon.rewind', { onclick: PlayerModel.rewind } ),
-            m('.micon.' + (PlayerModel.audio.paused ? 'play' : 'pause'), { 
-              onclick: PlayerModel.audio.paused ? PlayerModel.play : PlayerModel.pause
-            } ),
-            m('.micon.forward', { onclick: PlayerModel.forward } ),
-            m('.micon.next', { onclick: PlayerModel.next } )
-          ]),
-          m("input.audio-volume[type='range']", {
-            min: 0, max: 100,
-            onchange: e => {
-              PlayerModel.volume(parseInt(e.target.value)/100);
-            },
-            value: PlayerModel.audio.volume*100
-          })
+          m(".audio-volume", [
+            m('.micon.volume100'),
+            m("input[type='range'][orient='vertical']", {
+              min: 0, max: 100,
+              onchange: e => {
+                PlayerModel.volume(parseInt(e.target.value)/100);
+              },
+              value: PlayerModel.audio.volume*100
+            }),
+            m('.micon.volume0'),
+          ])
         ])
       ])
     ]);
