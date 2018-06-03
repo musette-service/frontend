@@ -15,7 +15,7 @@ const ControllerView = {
   oninit: () => {
     PlayerModel.setup();
   },
-  view: () => {
+  view: (vnode) => {
     let artwork = Playlist.art_cache[PlayerModel.current_item.picture];
     return m("section.controller", [
       m("section.audio-info", [
@@ -37,14 +37,26 @@ const ControllerView = {
           m(".audio-info-controls", [
             m('.micon.rewind', {
               ontouchstart: e => {
+                vnode.state.activity_time = new Date();
+                vnode.state.timeout = window.setInterval((e) => {
+                  if ((new Date() - vnode.state.activity_time) >= 200) PlayerModel.rewind();
+                }, 100);
                 e.preventDefault();
               },
               ontouchend: e => {
+                if ((new Date() - vnode.state.activity_time) <= 200) PlayerModel.previous();
+                window.clearInterval(vnode.state.timeout);
                 e.preventDefault();
               },
               onmousedown: e => {
+                vnode.state.activity_time = new Date();
+                vnode.state.timeout = window.setInterval((e) => {
+                  if ((new Date() - vnode.state.activity_time) >= 200) PlayerModel.rewind();
+                }, 100);
               },
               onmouseup: e => {
+                if ((new Date() - vnode.state.activity_time) <= 200) PlayerModel.previous();
+                window.clearInterval(vnode.state.timeout);
               }
             }),
             m('.micon.' + (PlayerModel.audio.paused ? 'play' : 'pause'), {
@@ -52,14 +64,26 @@ const ControllerView = {
             }),
             m('.micon.forward', {
               ontouchstart: e => {
+                vnode.state.activity_time = new Date();
+                vnode.state.timeout = window.setInterval((e) => {
+                  if ((new Date() - vnode.state.activity_time) >= 200) PlayerModel.forward();
+                }, 100);
                 e.preventDefault();
               },
               ontouchend: e => {
+                if ((new Date() - vnode.state.activity_time) <= 200) PlayerModel.next();
+                window.clearInterval(vnode.state.timeout);
                 e.preventDefault();
               },
               onmousedown: e => {
+                vnode.state.activity_time = new Date();
+                vnode.state.timeout = window.setInterval((e) => {
+                  if ((new Date() - vnode.state.activity_time) >= 200) PlayerModel.forward();
+                }, 100);
               },
               onmouseup: e => {
+                if ((new Date() - vnode.state.activity_time) <= 200) PlayerModel.next();
+                window.clearInterval(vnode.state.timeout);
               }
             })
           ]),

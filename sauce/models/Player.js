@@ -76,10 +76,10 @@ const PlayerModel = {
     PlayerModel.audio.playbackRate = speed;
   },
   rewind: () => {
-    PlayerModel.seek(PlayerModel.audio.currentTime-5);
+    PlayerModel.seek(PlayerModel.audio.currentTime-1);
   },
   forward: () => {
-    PlayerModel.seek(PlayerModel.audio.currentTime+5);
+    PlayerModel.seek(PlayerModel.audio.currentTime+1);
   },
   volume: (val=0.5) => {
     PlayerModel.audio.volume = val;
