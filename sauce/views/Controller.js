@@ -96,22 +96,11 @@ const ControllerView = {
             max: PlayerModel.audio.duration||0
           })
         ]),
-        m(".audio-info-text", [
-          m(".audio-info-title", PlayerModel.current_item.title),
-          m(".audio-info-album", PlayerModel.current_item.album),
-          m(".audio-info-artist", PlayerModel.current_item.artist)
-        ]),
-        m("section.audio-controller", [
-          m(".audio-volume", [
-            m('.micon.volume100'),
-            m("input[type='range'][orient='vertical']", {
-              min: 0, max: 100,
-              onchange: e => {
-                PlayerModel.volume(parseInt(e.target.value)/100);
-              },
-              value: PlayerModel.audio.volume*100
-            }),
-            m('.micon.volume0'),
+        m(".audio-info-right", [
+          m(".audio-info-text", [
+            m(".audio-info-title", PlayerModel.current_item.title),
+            m(".audio-info-album", PlayerModel.current_item.album),
+            m(".audio-info-artist", PlayerModel.current_item.artist)
           ])
         ])
       ])

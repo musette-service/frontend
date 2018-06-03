@@ -123,6 +123,16 @@ nav.navbar, nav.titlebar {
   padding: .25em;
 }
 
+.navbar-item.volume input {
+  position: absolute;
+  top: 100%; left: 50%;
+  margin-left: -50%;
+  width: 100%;
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  z-index: 9999;
+}
+
 section.left {
   width: 30%;
   display: flex;
@@ -188,7 +198,6 @@ nav.browser-items {
 
 /* Controller */
 section.controller {
-  height: 30vh;
   margin: 0 1em;
   color: var(--primary);
   background-color: rgba(0,0,0,0.7);
@@ -202,8 +211,7 @@ section.controller-playbar {
 
 section.audio-info {
   display: flex;
-  height: 30vh;
-  align-items: center;
+  align-items: stretch;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -251,8 +259,8 @@ img.audio-info-background {
 
 section.audio-info-album {
   position: relative;
-  width: 30vh;
-  height: 30vh;
+  width: 15vw;
+  height: 15vw;
   display: flex;
   align-items: center;
   background: black;
@@ -266,7 +274,17 @@ section.audio-info-album:hover .audio-info-progress {
   max-width: 100%;
   flex: 1;
 }
+.audio-info-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 .audio-info-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: .5em;
   text-shadow: 0 0 8px var(--secondary-light);
 }
@@ -293,26 +311,6 @@ progress::-webkit-progress-value {
 }
 progress::-moz-progress-bar { /* progress meter/value */
   background-color: rgba(255, 255, 255, 0.75);
-}
-
-.audio-volume {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 20vh;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-.audio-volume .micon {
-  flex: 1;
-}
-
-.audio-volume input {
-  flex: 1;
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
 }
 
 /* Playlist */
