@@ -189,7 +189,6 @@ nav.browser-items {
 /* Controller */
 section.controller {
   height: 30vh;
-  min-height: 150px;
   margin: 0 1em;
   color: var(--primary);
   background-color: rgba(0,0,0,0.7);
@@ -204,7 +203,6 @@ section.controller-playbar {
 section.audio-info {
   display: flex;
   height: 30vh;
-  min-height: 150px;
   align-items: center;
   position: relative;
   overflow: hidden;
@@ -239,13 +237,13 @@ img.audio-info-background {
   display: flex;
   text-shadow: -.01em -.01em 0 #111, .01em -.01em 0 #111, -.01em .01em 0 #111, .01em .01em 0 #111;  
   text-align: center;
-  font-size: 2em;
+  font-size: 6vh;
 }
 .audio-info-controls .rewind {
   flex: 1;
 }
 .audio-info-controls .play, .audio-info-controls .pause {
-  font-size: 4em;
+  font-size: 12vh;
 }
 .audio-info-controls .forward {
   flex: 1;
@@ -255,8 +253,6 @@ section.audio-info-album {
   position: relative;
   width: 30vh;
   height: 30vh;
-  min-width: 150px;
-  min-height: 150px;
   display: flex;
   align-items: center;
   background: black;
@@ -303,6 +299,10 @@ progress::-moz-progress-bar { /* progress meter/value */
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 20vh;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 .audio-volume .micon {
@@ -373,7 +373,7 @@ section.playlist {
 }
 
 .playlist-cell.status {
-  flex-basis: 1.5em;
+  flex-basis: 1.75em;
   flex-grow: 0;
 }
 .playlist-cell.track {
