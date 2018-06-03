@@ -27,7 +27,7 @@ const TopView = {
             onchange: e => {
               PlayerModel.volume(parseInt(e.target.value)/100);
             },
-            value: parseFloat(PlayerModel.audio.volume)*100
+            value: parseFloat(PlayerModel.getVolume())*100
           })
         )
       ])

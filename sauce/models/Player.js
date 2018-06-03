@@ -9,10 +9,14 @@ const PlayerModel = {
   current_item: { album: '', artist: '', title: '', src: '' },
   current_index: -1,
   audio: null,
+  audio_ctx: null,
+  gain_node: null,
   progress_element: null,
   setup: () => {
+    let audio_ctx = new (window.AudioContext || window.webkitAudioContext)();
+    let gain_node = audio_ctx.createGain();
+
     let audio = document.createElement('audio');
-    audio.volume = 0.5;
     audio.setAttribute('preload', 'metadata');
     audio.ondurationchange = () => {
       if (PlayerModel.progress_element) PlayerModel.progress_element.max = audio.duration;
@@ -32,7 +36,16 @@ const PlayerModel = {
     audio.onpause = () => {
       Title.setPre('');
     };
+
+
+    let source = audio_ctx.createMediaElementSource(audio);
+    source.connect(gain_node);
+    gain_node.connect(audio_ctx.destination);
+    gain_node.gain.setValueAtTime(0.5, audio_ctx.currentTime);
+
+    PlayerModel.gain_node = gain_node;
     PlayerModel.audio = audio;
+    PlayerModel.audio_ctx = audio_ctx;
   },
   load: () => {
     console.log('load');
@@ -40,8 +53,6 @@ const PlayerModel = {
     PlayerModel.audio.src = 'api/play/'+PlayerModel.current_item.filename;
   },
   play: () => {
-    console.log('play');
-    console.dir(PlayerModel.audio);
     PlayerModel.audio.play();
   },
   pause: () => {
@@ -50,6 +61,9 @@ const PlayerModel = {
   stop: () => {
     PlayerModel.pause();
     PlayerModel.seek(0);
+  },
+  verifyState: () => {
+    if (PlayerModel.audio_ctx.state == 'suspended') PlayerModel.audio_ctx.resume();
   },
   set: (index) => {
     console.log('attempting to set to ' + index);
@@ -62,6 +76,7 @@ const PlayerModel = {
     }
     PlayerModel.load();
     PlayerModel.play();
+    PlayerModel.verifyState();
   },
   previous: () => {
     PlayerModel.set(PlayerModel.current_index-1);
@@ -82,7 +97,10 @@ const PlayerModel = {
     PlayerModel.seek(PlayerModel.audio.currentTime+1);
   },
   volume: (val=0.5) => {
-    PlayerModel.audio.volume = val;
+    PlayerModel.gain_node.gain.value = val;
+  },
+  getVolume: () => {
+    return PlayerModel.gain_node.gain.value;
   },
   setProgressElement: (element) => {
     PlayerModel.progress_element = element;
