@@ -1,4 +1,4 @@
-import { Log, App } from '../App.js';
+import { Log, App, isMobile } from '../App.js';
 
 const SplashView = {
   view: (vnode) => {
@@ -15,7 +15,11 @@ const SplashView = {
           })
           .then(result => {
             Log("Received server API!");
-            m.route.set("/f/", {}, { replace: true });
+            if (isMobile()) {
+              m.route.set("/p/", {}, { replace: true });
+            } else {
+              m.route.set("/f/", {}, { replace: true });
+            }
           })
           .catch(App.handleRequestError);
         }

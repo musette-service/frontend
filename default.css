@@ -160,6 +160,7 @@ section.browser {
 nav.browser-items {
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .browser-item {
   user-select: none;
@@ -257,7 +258,7 @@ img.audio-info-background {
   flex: 1;
 }
 
-section.audio-info-album {
+section.audio-info-art {
   position: relative;
   width: 15vw;
   height: 15vw;
@@ -266,7 +267,7 @@ section.audio-info-album {
   background: black;
 }
 
-section.audio-info-album:hover .audio-info-progress {
+section.audio-info-art:hover .audio-info-progress {
   height: 1.5vh;
 }
 
@@ -290,6 +291,13 @@ section.audio-info-album:hover .audio-info-progress {
 }
 .audio-info-title {
   font-size: 125%;
+}
+.audio-info-album {
+  display: inline-block;
+}
+.audio-info-year {
+  display: inline-block;
+  margin: 0 .5em;
 }
 .audio-info-progress {
   position: absolute;
@@ -326,6 +334,8 @@ section.playlist {
 .playlist-items {
   flex: 1;
   overflow: auto;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 .playlist-row {
   color: var(--primary);
@@ -405,3 +415,32 @@ audio::-webkit-media-controls-panel {
   opacity: 1.0;
 }
 
+/* Crummy tablets and mobiles in landscape */
+@media screen and (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
+  :root {
+    --font-size: 4vw;
+  }
+  section.right, section.controller, section.playlist {
+    margin: 0;
+    padding: 0;
+  }
+  section.audio-info-art {
+    width: 25vh;
+    height: 25vh;
+  }
+}
+
+/* Most mobiles */
+@media screen and (min-width: 320px) and (max-width: 480px) and (orientation: portrait) {
+  :root {
+    --font-size: 4vw;
+  }
+  section.right, section.controller, section.playlist {
+    margin: 0;
+    padding: 0;
+  }
+  section.audio-info-art {
+    width: 25vh;
+    height: 25vh;
+  }
+}

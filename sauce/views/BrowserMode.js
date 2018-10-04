@@ -1,5 +1,6 @@
 import { BrowserView }    from './Browser.js';
 import { TopView }        from './Top.js';
+import { NavBarView }        from './NavBar.js';
 
 const BrowserModeView = {
   view: (vnode) => {
@@ -9,7 +10,7 @@ const BrowserModeView = {
           m(BrowserView)
         ])
       ]),
-      m(TopView)
+      m(NavBarView)
     ]);
   }
 };

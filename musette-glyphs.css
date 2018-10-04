@@ -79,6 +79,9 @@
 .micon.settings-alt::before {
   content: '\00e015';
 }
+.micon.playlist::before {
+  content: '\00e016';
+}
 
 .micon.home::before {
   content: '\00e020';

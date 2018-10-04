@@ -4,6 +4,7 @@ import { PlaylistView }   from './Playlist.js';
 import { Playlist }       from '../models/Session.js';
 import { ControllerView } from './Controller.js';
 import { TopView }        from './Top.js';
+import { NavBarView }     from './NavBar.js';
 
 const PlayerModeView = {
   view: (vnode) => {
@@ -14,7 +15,7 @@ const PlayerModeView = {
           m(PlaylistView)
         ])
       ]),
-      m(TopView)
+      m(NavBarView)
     ]);
   }
 };

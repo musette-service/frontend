@@ -26,7 +26,7 @@ const ControllerView = {
           :
             ''
         }),
-        m("section.audio-info-album", [
+        m("section.audio-info-art", [
           m("img.audio-info-image", { 
             src: artwork
             ?
@@ -99,7 +99,10 @@ const ControllerView = {
         m(".audio-info-right", [
           m(".audio-info-text", [
             m(".audio-info-title", PlayerModel.current_item.title),
-            m(".audio-info-album", PlayerModel.current_item.album),
+            m("div", [
+              m(".audio-info-album", PlayerModel.current_item.album),
+              m(".audio-info-year", PlayerModel.current_item.year)
+            ]),
             m(".audio-info-artist", PlayerModel.current_item.artist)
           ])
         ])
