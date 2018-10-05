@@ -36,6 +36,9 @@ const PlayerModel = {
     audio.onpause = () => {
       Title.setPre('');
     };
+    audio.oncanplaythrough = () => {
+      PlayerModel.play()
+    };
 
 
     let source = audio_ctx.createMediaElementSource(audio);
