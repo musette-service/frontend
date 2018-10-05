@@ -428,6 +428,13 @@ audio::-webkit-media-controls-panel {
     width: 25vh;
     height: 25vh;
   }
+  .audio-info-controls .micon {
+    font-size: 5vh;
+  }
+  .audio-info-controls .play, .audio-info-controls .pause {
+    font-size: 10vh;
+  }
+
 }
 
 /* Most mobiles */
@@ -439,8 +446,15 @@ audio::-webkit-media-controls-panel {
     margin: 0;
     padding: 0;
   }
+
   section.audio-info-art {
     width: 25vh;
     height: 25vh;
+  }
+  .audio-info-controls .micon {
+    font-size: 5vh;
+  }
+  .audio-info-controls .play, .audio-info-controls .pause {
+    font-size: 10vh;
   }
 }
