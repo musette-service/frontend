@@ -27,32 +27,42 @@ const BrowserView = {
       ]),
       m("nav.browser-items", BrowserModel.files.map((file, index) => {
         return m('.browser-item', {
-          class: (file.items ? 'directory' : 'file') + (BrowserModel.last_selected == index ? ' selected' : '')
+          class: (file.items ? 'directory' : 'file') + (BrowserModel.last_selected == index ? ' selected' : ''),
+          onclick: (e) => {
+            if (e.shiftKey) {
+              if (index > BrowserModel.last_selected) {
+                for (let i = BrowserModel.last_selected; i != index+1; i++) {
+                  if (i == BrowserModel.last_selected && BrowserModel.isChecked(i)) continue
+                  BrowserModel.toggleChecked(i);
+                }
+              } else {
+                for (let i = index; i != BrowserModel.last_selected; i++) {
+                  if (i == BrowserModel.last_selected && BrowserModel.isChecked(i)) continue
+                  BrowserModel.toggleChecked(i);
+                }
+              }
+            } else {
+              if (BrowserModel.last_selected == index) {
+                if (file.items) BrowserModel.travel(file.path);
+                else BrowserModel.toggleChecked(index);
+              } else {
+                BrowserModel.toggleChecked(index);
+              }
+            }
+            BrowserModel.last_selected = index;
+          }
         }, [
           m('.micon.' + (file.items ? 'folder' : 'file.tag'), {
             "data-content": BrowserModel.getFileExt(file.path)
           }),
-          m('span.browser-item-name', {
-            onclick: (e) => {
-              if (e.shiftKey) {
-                const start   = Math.min(BrowserModel.last_selected, index);
-                const end     = Math.max(BrowserModel.last_selected, index) + 1;
-                for (let i = start; i != end; i++) {
-                  BrowserModel.toggleChecked(i);
-                }
-              } else {
-                if (BrowserModel.last_selected == index) {
-                  if (file.items) BrowserModel.travel(file.path);
-                  else BrowserModel.toggleChecked(index);
-                }
-                BrowserModel.last_selected = index;
-              }
-            },
-          },
-          file.path),
-          m('.micon.' + (BrowserModel.isChecked(index) ? 'checked' : 'unchecked'), { 
-            onclick: () => { BrowserModel.toggleChecked(index) }
-          })
+          m('span.browser-item-name', file.path),
+          (file.items
+            ? 
+            null
+            :
+            m('.micon.' + (BrowserModel.isChecked(index) ? 'checked' : 'unchecked'), { 
+            })
+          )
         ]);
       }))
     ]);
