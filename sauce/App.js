@@ -10,8 +10,11 @@ window.addEventListener('DOMContentLoaded', () => {
   m.route(document.body, '/splash', {
     '/splash': SplashView,
     '/l': LoginView,
+    '/f/': FullModeView,
     '/f/:dir_path...': FullModeView,
+    '/p/': PlayerModeView,
     '/p/:dir_path...': PlayerModeView,
+    '/b/': BrowserModeView,
     '/b/:dir_path...': BrowserModeView
   });
   // Disallow text selection (this is to allow for shift+clicking without selecting ranges of text. Might be better to hook it directly on those elements, if possible?)
@@ -62,7 +65,7 @@ const Auth = {
   login: (username, password) => {
     m.request({
       method: "POST",
-      data: {
+      body: {
         username: username,
         password: password
       },
@@ -73,7 +76,7 @@ const Auth = {
       m.route.set("/splash/", {}, { replace: true });
     })
     .catch(e => {
-      Log(e.message);
+      Log(e.response.message);
       console.dir(e);
     });
   }
@@ -81,11 +84,11 @@ const Auth = {
 
 const App = {
   handleRequestError: error => {
-    if (error.status == 401) { // Login request
+    if (error.response.status == 401) { // Login request
       Log("Login required.");
       m.route.set("/l/", {}, { replace: true });
     } else {
-      Log(error.status+": " + error.message)
+      Log(error.response.status+": " + error.response.message)
     }
   }
 };
