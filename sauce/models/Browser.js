@@ -35,7 +35,7 @@ const BrowserModel = {
     let abs_path = absolute('', pathJoin([BrowserModel.current_path, path]));
     m.request({
       method: 'GET',
-      url: '/api/browse'+abs_path,
+      url: '/api/browse'+encodeURIComponent(abs_path),
       withCredentials: true
     })
     .then(data => {

@@ -96,7 +96,7 @@ const Playlist = {
 
     m.request({
       method: 'GET',
-      url: '/api/info'+base_path,
+      url: '/api/info'+encodeURIComponent(base_path),
       withCredentials: true,
       params: {tracks: files, art: Object.keys(Playlist.art_cache) }
     })

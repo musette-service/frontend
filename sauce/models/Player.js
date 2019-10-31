@@ -53,7 +53,7 @@ const PlayerModel = {
   load: () => {
     console.log('load');
     Title.set([PlayerModel.current_item.title, PlayerModel.current_item.album, PlayerModel.current_item.artist]);
-    PlayerModel.audio.src = 'api/play/'+PlayerModel.current_item.filename;
+    PlayerModel.audio.src = 'api/play'+encodeURIComponent('/'+PlayerModel.current_item.filename);
   },
   play: () => {
     PlayerModel.audio.play();
