@@ -40,7 +40,6 @@ const PlayerModel = {
       PlayerModel.play()
     };
 
-
     let source = audio_ctx.createMediaElementSource(audio);
     source.connect(gain_node);
     gain_node.connect(audio_ctx.destination);
@@ -51,7 +50,6 @@ const PlayerModel = {
     PlayerModel.audio_ctx = audio_ctx;
   },
   load: () => {
-    console.log('load');
     Title.set([PlayerModel.current_item.title, PlayerModel.current_item.album, PlayerModel.current_item.artist]);
     PlayerModel.audio.src = 'api/play'+encodeURIComponent('/'+PlayerModel.current_item.filename);
   },
@@ -69,7 +67,6 @@ const PlayerModel = {
     if (PlayerModel.audio_ctx.state == 'suspended') PlayerModel.audio_ctx.resume();
   },
   set: (index) => {
-    console.log('attempting to set to ' + index);
     PlayerModel.current_item  = Playlist.get(index);
     if (!PlayerModel.current_item) {
       PlayerModel.current_item = PlayerModel.null_item;
@@ -100,7 +97,7 @@ const PlayerModel = {
     PlayerModel.seek(PlayerModel.audio.currentTime+1);
   },
   volume: (val=0.5) => {
-    PlayerModel.gain_node.gain.value = val;
+    PlayerModel.gain_node.gain.setValueAtTime(val, PlayerModel.audio_ctx.currentTime);
   },
   getVolume: () => {
     return PlayerModel.gain_node.gain.value;
