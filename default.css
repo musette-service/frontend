@@ -359,6 +359,8 @@ section.playlist {
   width: 100%;
   border-collapse: collapse;
   overflow-y: scroll;
+  color: var(--secondary-light);
+  font-weight: bold;
 }
 .playlist-row-header::-webkit-scrollbar {
   visibility: hidden;
