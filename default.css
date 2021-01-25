@@ -329,6 +329,7 @@ section.playlist {
   margin: 1em 1em 0 1em;
   background-color: rgba(0,0,0,0.7);
   box-shadow: 2px 2px 16px black;
+  overflow: auto;
 }
 
 .playlist-items {
