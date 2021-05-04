@@ -92,6 +92,10 @@ const ControllerView = {
               // We keep track of this directly so we don't call m.redraw for every update
               PlayerModel.setProgressElement(vnode.dom);
             },
+            onclick: (e) => {
+              let box = e.target.getBoundingClientRect();
+              PlayerModel.seek(PlayerModel.audio.duration * ((e.clientX - box.left) / box.width));
+            },
             value: PlayerModel.audio.currentTime||0,
             max: PlayerModel.audio.duration||0
           })
