@@ -1,6 +1,6 @@
 {
   "name": "musette-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Herein lies in-progress code for the client frontend for Musette, the remote music player.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
