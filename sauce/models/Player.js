@@ -107,6 +107,15 @@ const PlayerModel = {
   },
   isCurrent: index => {
     return index == PlayerModel.current_index;
+  },
+  getFormattedTime: (t=PlayerModel.audio.currentTime) => {
+    if (PlayerModel.audio.duration !== PlayerModel.audio.duration) {
+      return '';
+    }
+    let h = Math.floor(t / 60 / 60);
+    let m = Math.floor(t / 60) - h * 60;
+    var s = Math.floor(t % 60);
+    return (h?(h.toString().padStart(2, '0') + ':'):'') + m.toString().padStart(2, '0') + ':' + s.toString().padStart(2, '0');
   }
 };
 

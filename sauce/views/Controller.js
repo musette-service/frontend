@@ -12,8 +12,11 @@ function _arrayBufferToBase64( buffer ) {
 }
 
 const ControllerView = {
-  oninit: () => {
+  oninit: (vnode) => {
     PlayerModel.setup();
+    vnode.state.show_timestamp = false;
+    vnode.state.timestamp_position = 0;
+    vnode.state.timestamp_offset = 0;
   },
   view: (vnode) => {
     let artwork = Playlist.art_cache[PlayerModel.current_item.picture];
@@ -96,9 +99,28 @@ const ControllerView = {
               let box = e.target.getBoundingClientRect();
               PlayerModel.seek(PlayerModel.audio.duration * ((e.clientX - box.left) / box.width));
             },
+            onmouseover: (e) => {
+              vnode.state.show_timestamp = true;
+            },
+            onmouseout: (e) => {
+              vnode.state.show_timestamp = false;
+            },
+            onmousemove: (e) => {
+              let box = e.target.getBoundingClientRect();
+              vnode.state.timestamp_position = e.clientX - box.left;
+              vnode.state.timestamp_offset = PlayerModel.audio.duration * ((e.clientX - box.left) / box.width);
+            },
             value: PlayerModel.audio.currentTime||0,
             max: PlayerModel.audio.duration||0
-          })
+          }),
+          (!vnode.state.show_timestamp?null:[
+            m(".audio-info-timestamp", {
+              style: {left: vnode.state.timestamp_position+'px'}
+            }, PlayerModel.getFormattedTime(vnode.state.timestamp_offset)),
+            m(".audio-info-timestamp-indicator", {
+              style: {left: vnode.state.timestamp_position+'px'}
+            })
+          ]),
         ]),
         m(".audio-info-right", [
           m(".audio-info-text", [
