@@ -363,6 +363,7 @@ section.playlist {
   overflow-y: scroll;
   color: var(--secondary-light);
   font-weight: bold;
+  scrollbar-color: transparent transparent;
 }
 .playlist-row-header::-webkit-scrollbar {
   visibility: hidden;
