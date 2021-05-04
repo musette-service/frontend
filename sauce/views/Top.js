@@ -5,7 +5,6 @@ const TopView = {
     return m('nav.navbar', [
       m('.navbar-item', [m('.micon.musette')]),
       m('.navbar-item', [m('.micon.settings-alt')]),
-      m('.navbar-item', [m('.micon.settings')]),
       m('.navbar-item.volume', [
         m('.micon.volume100', {
           onclick: e => {
