@@ -22,13 +22,15 @@ const ControllerView = {
     let artwork = Playlist.art_cache[PlayerModel.current_item.picture];
     return m("section.controller", [
       m("section.audio-info", [
-        m("img.audio-info-background", { 
-          src: artwork
-          ?
-            'data:' + artwork.format + ';base64,' + _arrayBufferToBase64(artwork.data)
-          :
-            ''
-        }),
+        m("section.audio-info-background", 
+          m("img.audio-info-background-image", { 
+            src: artwork
+            ?
+              'data:' + artwork.format + ';base64,' + _arrayBufferToBase64(artwork.data)
+            :
+              ''
+          })
+        ),
         m("section.audio-info-art", [
           m("img.audio-info-image", { 
             src: artwork

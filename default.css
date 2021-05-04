@@ -220,7 +220,16 @@ section.audio-info {
   z-index: 1;
 }
 
-img.audio-info-background {
+section.audio-info-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+img.audio-info-background-image {
   position: absolute;
   margin-top: -25%;
   top: 0;
