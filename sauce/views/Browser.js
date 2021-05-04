@@ -11,16 +11,10 @@ const BrowserView = {
     return m("section.browser", [
       m("section.browser-controls", [
         m('.micon.home', { onclick: () => {
-          BrowserModel.travel('/')
-          .then(() => {
-            document.getElementsByClassName('browser-items')[0].scrollTop = BrowserModel.getScroll();
-          });
+          BrowserModel.travel('/');
         } }),
         m('.micon.up', { onclick: () => { 
-          BrowserModel.travel('../')
-          .then(() => {
-            document.getElementsByClassName('browser-items')[0].scrollTop = BrowserModel.getScroll();
-          });
+          BrowserModel.travel('../');
         } }),
         m('.micon.add', {
           onclick: () => {
@@ -38,7 +32,10 @@ const BrowserView = {
       m("nav.browser-items", {
         onscroll: (e) => {
           BrowserModel.setScroll(e.target.scrollTop);
-        }
+        },
+        onupdate: () => {
+          document.getElementsByClassName('browser-items')[0].scrollTop = BrowserModel.getScroll();
+        },
       }, BrowserModel.files.map((file, index) => {
         return m('.browser-item', {
           class: (file.items ? 'directory' : 'file') + (BrowserModel.last_selected == index ? ' selected' : ''),
@@ -58,10 +55,7 @@ const BrowserView = {
             } else {
               if (BrowserModel.last_selected == index) {
                 if (file.items) {
-                  BrowserModel.travel(file.path)
-                  .then(() => {
-                    document.getElementsByClassName('browser-items')[0].scrollTop = BrowserModel.getScroll();
-                  });
+                  BrowserModel.travel(file.path);
                 } else {
                   BrowserModel.toggleChecked(index);
                 }
