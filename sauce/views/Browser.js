@@ -10,8 +10,18 @@ const BrowserView = {
   view: vnode => {
     return m("section.browser", [
       m("section.browser-controls", [
-        m('.micon.home', { onclick: () => { BrowserModel.travel('/'); } }),
-        m('.micon.up', { onclick: () => { BrowserModel.travel('../'); } }),
+        m('.micon.home', { onclick: () => {
+          BrowserModel.travel('/')
+          .then(() => {
+            document.getElementsByClassName('browser-items')[0].scrollTop = BrowserModel.getScroll();
+          });
+        } }),
+        m('.micon.up', { onclick: () => { 
+          BrowserModel.travel('../')
+          .then(() => {
+            document.getElementsByClassName('browser-items')[0].scrollTop = BrowserModel.getScroll();
+          });
+        } }),
         m('.micon.add', {
           onclick: () => {
             let targets = [];
@@ -25,7 +35,11 @@ const BrowserView = {
           }, style: 'float:right'
         })
       ]),
-      m("nav.browser-items", BrowserModel.files.map((file, index) => {
+      m("nav.browser-items", {
+        onscroll: (e) => {
+          BrowserModel.setScroll(e.target.scrollTop);
+        }
+      }, BrowserModel.files.map((file, index) => {
         return m('.browser-item', {
           class: (file.items ? 'directory' : 'file') + (BrowserModel.last_selected == index ? ' selected' : ''),
           onclick: (e) => {
@@ -43,8 +57,14 @@ const BrowserView = {
               }
             } else {
               if (BrowserModel.last_selected == index) {
-                if (file.items) BrowserModel.travel(file.path);
-                else BrowserModel.toggleChecked(index);
+                if (file.items) {
+                  BrowserModel.travel(file.path)
+                  .then(() => {
+                    document.getElementsByClassName('browser-items')[0].scrollTop = BrowserModel.getScroll();
+                  });
+                } else {
+                  BrowserModel.toggleChecked(index);
+                }
               } else {
                 BrowserModel.toggleChecked(index);
               }
