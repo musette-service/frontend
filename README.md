@@ -13,3 +13,8 @@ Per default -- and for development purposes -- the contents of this directory ca
     <!-- <script type="module" src="sauce/App.js"></script> -->
 
 Once these changes are made, musette-client will use a minified bundle of all the individual ES6 modules stored in the `sauce/` directory.
+
+## Installing
+If desired, the client files can be installed in a system directory. This is generally only done if the [server](https://github.com/kettek/musette-server) is also being installed. On *nix, this is most easily done by using the GNU Makefile in the scripts directory. To install, first build the client with `make -f scripts/Makefile`, and then issue `make -f scripts/Makefile install`. This will, if $PREFIX is not provided as an environment variable, install to `/usr/local/share/musette/client`.
+
+Uninstallation can be done by issuing `make -f scripts/Makefile uninstall`.
