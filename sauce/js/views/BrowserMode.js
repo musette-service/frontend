@@ -1,6 +1,6 @@
-import { BrowserView }    from './Browser.js';
-import { TopView }        from './Top.js';
-import { NavBarView }        from './NavBar.js';
+import m from 'mithril'
+import { BrowserView } from './Browser.js'
+import { NavBarView } from './NavBar.js'
 
 const BrowserModeView = {
   view: (vnode) => {
@@ -11,8 +11,8 @@ const BrowserModeView = {
           m(BrowserView)
         ])
       ])
-    ]);
+    ])
   }
-};
+}
 
-export { BrowserModeView };
+export { BrowserModeView }

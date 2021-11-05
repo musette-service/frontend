@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Musette Glyphs";
-  src: url(musette-glyphs.ttf);
+  src: url("../fonts/musette-glyphs.ttf");
 }
 
 .micon {
@@ -192,6 +192,10 @@
 }
 .micon.file-wave::after, .micon[data-content="wave"]::after {
   content: '\00e04f';
+}
+
+.micon.plugin-metabase::before {
+  content: '\00e060';
 }
 
 .micon.rotate::before {
