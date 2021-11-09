@@ -13,11 +13,16 @@ const PluginsModel = {
     throw "no non-local plugins available yet"
   },
   loadLocal: async ({name, version="1.0.0"}={}) => {
-    let r = await import(`${Config.pluginsRoot}${name}/index.js`)
-    let plugin = r.default
-    PluginsModel.plugins[name] = plugin
-    plugin.init(App)
-    return plugin
+    try {
+      let r = await import(`${Config.pluginsRoot}${name}/index.js`)
+      let plugin = r.default
+      PluginsModel.plugins[name] = plugin
+      plugin.init(App)
+      return plugin
+    } catch(err) {
+      Log(`Failed to load ${name}:`, err)
+      return null
+    }
   },
 }
 

@@ -9,16 +9,22 @@ const SplashView = {
       m('img.fadeout', {
         src: 'img/musette-1024x1024.png',
         onload: async (e) => {
-          if (App.serverAPI !== null) {
-            if (isMobile()) {
-              m.route.set('/p/', {}, { replace: true })
-            } else {
-              m.route.set('/f/', {}, { replace: true })
+          // If we have API, simply travel to our next route.
+          if (App.hasAPI()) {
+            try {
+              if (isMobile()) {
+                m.route.set('/p/', {}, { replace: true })
+              } else {
+                m.route.set('/f/', {}, { replace: true })
+              }
+            } catch(err) {
+              App.handleRequestError(err)
             }
             return
           }
           Log('Requesting server API...')
           e.target.classList.add('fadein')
+
           try {
             let result = await m.request({
               method: 'GET',

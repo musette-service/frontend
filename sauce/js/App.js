@@ -79,7 +79,11 @@ const Auth = {
       withCredentials: true
     })
       .then(result => {
-        m.route.set('/splash/', {}, { replace: true })
+        if (!App.hasAPI()) {
+          m.mount(document.body, SplashView)
+        } else {
+          m.route.set('/splash/', {}, { replace: true })
+        }
       })
       .catch(e => {
         Log(e.response.message)
@@ -90,14 +94,24 @@ const Auth = {
 
 const App = {
   handleRequestError: error => {
-    console.log(error)
-    if (error.response.status === 401) { // Login request
-      Log('Login required.')
-      m.route.set('/l/', {}, { replace: true })
+    if (error.response) {
+      if (error.response.status === 401) { // Login request
+        // If we got a 401, let's refresh API
+        App.serverAPI = null
+        Log('Login required.')
+        if (App.serverAPI === null) {
+          m.mount(document.body, LoginView)
+        } else {
+          m.route.set('/l/', {}, { replace: true })
+        }
+      } else {
+        Log('unknown error', error)
+      }
     } else {
       Log(error.response.status + ': ' + error.response.message)
     }
   },
+  hasAPI: () => { App.serverAPI !== null },
   serverAPI: null,
   plugins: PluginsModel,
   loadPlugin: (name, plugin) => {
