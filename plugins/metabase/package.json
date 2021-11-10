@@ -1,0 +1,18 @@
+{
+  "name": "metabase",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild sauce/index.js --format=esm --minify --bundle --outdir=../../dist/plugins/metabase"
+  },
+  "keywords": [],
+  "author": "Ketchetwahmeegwun T. Southall",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "esbuild": "^0.13.12",
+    "mithril": "^2.0.4",
+    "standardx": "^7.0.0"
+  }
+}

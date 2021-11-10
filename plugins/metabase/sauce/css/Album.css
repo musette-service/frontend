@@ -1,0 +1,81 @@
+section.albums {
+  color: var(--primary);
+  background-color: rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 16px black;
+  padding: .5em;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+nav.album-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+
+.album-item {
+  width: 8.7vw;
+  height: 8.7vw;
+  position: relative;
+  cursor: pointer;
+}
+
+.album-item-art {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: .2em;
+}
+
+.album-item-art img {
+  width: 100%;
+  height: 100%;
+}
+
+.album-item:hover .album-item-info, .album-item.-selected .album-item-info {
+  opacity: 1.0;
+}
+
+.album-item-info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-shadow: 0 0 3px var(--primary-fg), 0 0 3px var(--primary-fg), 0 0 3px var(--primary-fg);
+  color: var(--primary-light);
+  opacity: 0;
+  transition: all .2s;
+  user-select: none;
+}
+
+.album-item-info-title {
+  position: absolute;
+  bottom: .5em;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 60%;
+}
+.album-item-info-year {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  font-size: 50%;
+  padding: .1em .3em;
+}
+
+.album-item-selected {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 200%;
+  text-shadow: 0 0 3px var(--primary-fg), 0 0 3px var(--primary-fg), 0 0 3px var(--primary-fg);
+  color: var(--primary-light);
+}
