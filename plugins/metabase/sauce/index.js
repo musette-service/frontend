@@ -6,6 +6,7 @@ import { MetabaseModel } from './models/Metabase.js'
 import { MetabaseView } from './views/Metabase.js'
 import { AlbumsView } from './views/Albums.js'
 import { NavBarItem } from './views/NavBarItem.js'
+import { NavBarAlbum } from './views/NavBarAlbum.js'
 
 const MetabasePlugin = {
   init: ({config, playlist}) => {
@@ -13,6 +14,10 @@ const MetabasePlugin = {
     console.log('MetabasePlugin init')
   },
   navigation: [NavBarItem],
+  navigations: {
+    navbar: [NavBarItem],
+    browsebar: [NavBarAlbum],
+  },
   components: {
     'metabase-navitem': NavBarItem,
     'metabase-view': MetabaseView,
