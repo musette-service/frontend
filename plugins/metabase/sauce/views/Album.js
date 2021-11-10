@@ -13,9 +13,9 @@ const AlbumView = {
       m('.album-item-art', m('img', {src: vnode.attrs.src})),
       m('.album-item-info', [
         m('.album-item-info-title', vnode.attrs.title),
-        m('.album-item-info-year', vnode.attrs.year),
+        m('.album-item-info-artist', vnode.attrs.artist),
+        /*m('.album-item-info-year', vnode.attrs.year),*/
       ]),
-      m('.album-item-selected', vnode.attrs.selected?m('.micon.checked'):null)
     ])
   }
 }
