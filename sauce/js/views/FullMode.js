@@ -1,10 +1,10 @@
 'use strict'
 import m from 'mithril'
-import { BrowserView } from './Browser.js'
-import { PlaylistView } from './Playlist.js'
-import { ControllerView } from './Controller.js'
-import { TopView } from './Top.js'
+import { BrowserView } from './components/Browser.js'
+import { PlaylistView } from './components/Playlist.js'
+import { ControllerView } from './components/Controller.js'
 import { isMobile } from '../App.js'
+import { Layout } from '../models/Layout.js'
 
 const FullModeView = {
   oncreate: (vnode) => {
@@ -14,7 +14,7 @@ const FullModeView = {
   },
   view: (vnode) => {
     return m('section.container.fadeout', [
-      isMobile() ? null : m(TopView),
+      isMobile() ? null : m(Layout.component('navbar')),
       m('section.content', [
         m('section.left', [
           m(BrowserView, { dir_path: vnode.attrs.dir_path })
@@ -24,7 +24,7 @@ const FullModeView = {
           m(PlaylistView)
         ])
       ]),
-      isMobile() ? m(TopView) : null
+      isMobile() ? Layout.component('navbar') : null
     ])
   }
 }

@@ -1,6 +1,6 @@
 import m from 'mithril'
-import { Playlist } from '../models/Session.js'
-import { PlayerModel } from '../models/Player.js'
+import { Playlist } from '../../models/Session.js'
+import { PlayerModel } from '../../models/Player.js'
 
 function handleKeypress (e) {
   if (e.keyCode === 46) { // "Delete"

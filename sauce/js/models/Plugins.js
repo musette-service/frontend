@@ -13,16 +13,24 @@ const PluginsModel = {
     throw "no non-local plugins available yet"
   },
   loadLocal: async ({name, version="1.0.0"}={}) => {
+    let plugin = null
     try {
       let r = await import(`${Config.pluginsRoot}${name}/index.js`)
-      let plugin = r.default
+      plugin = r.default
       PluginsModel.plugins[name] = plugin
-      plugin.init(App)
-      return plugin
     } catch(err) {
       Log(`Failed to load ${name}:`, err)
-      return null
     }
+    // Try to also load a CSS file.
+    let el = document.createElement('link')
+    el.setAttribute('rel', 'stylesheet')
+    el.setAttribute('href', `${Config.pluginsRoot}${name}/index.css`)
+    el.addEventListener('error', e => {
+      // Remove from head if errror occurred.
+      document.head.removeChild(el)
+    })
+    document.head.appendChild(el)
+    return plugin
   },
 }
 

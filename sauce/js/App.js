@@ -7,32 +7,19 @@ import { FullModeView } from './views/FullMode.js'
 import { PlayerModeView } from './views/PlayerMode.js'
 import { BrowserModeView } from './views/BrowserMode.js'
 import { Log } from './models/Log.js'
+import { Layout } from './models/Layout.js'
 import { PluginsModel } from './models/Plugins.js'
 import { Config } from './models/Config.js'
+import { BrowserView } from './views/components/Browser.js'
+import { ControllerView } from './views/components/Controller.js'
+import { PlaylistView } from './views/components/Playlist.js'
+import { BrowseNav } from './views/components/nav/Browse.js'
+import { PlaylistNav } from './views/components/nav/Playlist.js'
+import { MusetteNav } from './views/components/nav/Musette.js'
+import { VolumeNav } from './views/components/nav/Volume.js'
+import { Playlist } from './models/Session.js'
 
 window.addEventListener('DOMContentLoaded', () => {
-  /*m.route(document.body, '/splash', {
-    '/splash': SplashView,
-    '/l': LoginView,
-    '/f/': FullModeView,
-    '/f/:dir_path...': FullModeView,
-    '/p/': PlayerModeView,
-    '/p/:dir_path...': PlayerModeView,
-    '/b/': BrowserModeView,
-    '/b/:dir_path...': BrowserModeView,
-    '/plugins/:plugin/:path...': {
-      onmatch(args, requestedPath, route) {
-        let match = Object.values(PluginsModel.plugins).find(v=>v.routes[args.plugin])
-        if (match) {
-          return match.routes[args.plugin]
-        }
-        return m.route.SKIP
-      }
-    },
-  })*/
-  if (!App.serverAPI) {
-    //m.route.set('/splash', {}, { replace: true })
-  }
   m.mount(document.body, SplashView)
   // Disallow text selection (this is to allow for shift+clicking without selecting ranges of text. Might be better to hook it directly on those elements, if possible?)
   document.onselectstart = () => { return false }
@@ -105,10 +92,10 @@ const App = {
           m.route.set('/l/', {}, { replace: true })
         }
       } else {
-        Log('unknown error', error)
+        Log(error.response.status + ': ' + error.response.message)
       }
     } else {
-      Log(error.response.status + ': ' + error.response.message)
+      Log('unknown error', error)
     }
   },
   hasAPI: () => { App.serverAPI !== null },
@@ -127,7 +114,70 @@ const App = {
     '/p/:dir_path...': PlayerModeView,
     '/b/': BrowserModeView,
     '/b/:dir_path...': BrowserModeView,
-  }
+  },
+  async init(api) {
+    App.serverAPI = api
+
+    Layout.mobile = isMobile()
+    Layout.components['browser'] = BrowserView
+    Layout.components['login'] = LoginView
+    Layout.components['controller'] = ControllerView
+    Layout.components['playlist'] = PlaylistView
+    if (isMobile()) {
+      Layout.navigation.add(BrowseNav)
+      Layout.navigation.add(PlaylistNav)
+      Layout.navigation.add(VolumeNav)
+    } else {
+      Layout.navigation.add(MusetteNav)
+      Layout.navigation.add(VolumeNav)
+    }
+    await App.processPlugins()
+    App.setupRoutes()
+  },
+  async processPlugins() {
+    for (let req in App.serverAPI.requires) {
+      Log('Plugin: '+req)
+      // TODO: We should do a CDN lookup here, but for now we presume its bundled with this install.
+      let p = await PluginsModel.loadLocal({name: req, version: App.serverAPI.requires[req], bundled: true})
+      if (p) p.init({config: Config, playlist: Playlist})
+    }
+    // NOTE: We're presuming there will be no further dynamic plugin requests, as m.route is intended to only be called once per page.
+    for (let p of Object.values(PluginsModel.plugins)) {
+      if (p.navigation) {
+        for (let c of p.navigation) {
+          Layout.navigation.add(c)
+        }
+      }
+    }
+  },
+  setupRoutes() {
+    // Collect all our unique plugin routes
+    let pluginRoutes = {}
+    for (let p of Object.values(PluginsModel.plugins)) {
+      if (p.routes) {
+        for (let [k, v] of Object.entries(p.routes)) {
+          ;((k,v) =>
+            pluginRoutes[k] = {
+              view: () => {
+                return v(Layout)
+              }
+            }
+          )(k,v)
+        }
+      }
+    }
+
+    m.route(document.body, '/splash', {
+      ...App.routes,
+      ...pluginRoutes,
+    })
+
+    if (isMobile()) {
+      m.route.set('/p/', {}, { replace: true })
+    } else {
+      m.route.set('/f/', {}, { replace: true })
+    }
+  },
 }
 
 // FIXME: This isn't quite the right way to do this, but it does allow us to override Config values via a script tag in index.html. This allows a musette client instance to be able to easily point to an external musette server without rebuilding the client from source.

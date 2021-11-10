@@ -145,6 +145,12 @@ section.right {
   padding: 1em 0;
   overflow: auto;
 }
+section.major {
+  color: var(--primary);
+  background-color: rgba(0,0,0,0.7);
+  box-shadow: 2px 2px 16px black;
+  padding: .5em;
+}
 
 /* Browser */
 section.browser {

@@ -1,7 +1,7 @@
 import m from 'mithril'
 
-import { Playlist } from '../models/Session.js'
-import { PlayerModel } from '../models/Player.js'
+import { Playlist } from '../../models/Session.js'
+import { PlayerModel } from '../../models/Player.js'
 
 function _arrayBufferToBase64 (buffer) {
   let binary = ''

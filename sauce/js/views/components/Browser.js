@@ -1,8 +1,8 @@
 'use strict'
 
 import m from 'mithril'
-import { Playlist } from '../models/Session.js'
-import { BrowserModel } from '../models/Browser.js'
+import { Playlist } from '../../models/Session.js'
+import { BrowserModel } from '../../models/Browser.js'
 
 const BrowserView = {
   oncreate: (vnode) => {
