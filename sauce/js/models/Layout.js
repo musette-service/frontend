@@ -10,8 +10,19 @@ const Layout = {
       Layout.navigation.components.push(component)
     },
   },
+  navigations: {
+    browsebar: [],
+    navbar: [],
+  },
   components: {
     navbar() {
+      return {
+        view: () => {
+          return m('nav.navbar', Layout.navigation.components.map(v=>m(v)))
+        }
+      }
+    },
+    browsebar() {
       return {
         view: () => {
           return m('nav.navbar', Layout.navigation.components.map(v=>m(v)))

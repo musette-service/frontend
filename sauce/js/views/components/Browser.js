@@ -3,6 +3,7 @@
 import m from 'mithril'
 import { Playlist } from '../../models/Session.js'
 import { BrowserModel } from '../../models/Browser.js'
+import { Layout } from '../../models/Layout.js'
 
 const BrowserView = {
   oncreate: (vnode) => {
@@ -21,6 +22,7 @@ const BrowserView = {
             BrowserModel.travel('../')
           }
         }),
+        ...Layout.navigations.browsebar.map(v=>m(v)),
         m('.micon.add', {
           onclick: () => {
             const targets = []

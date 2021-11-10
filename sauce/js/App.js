@@ -130,6 +130,8 @@ const App = {
     } else {
       Layout.navigation.add(MusetteNav)
       Layout.navigation.add(VolumeNav)
+      Layout.navigations.navbar.push(MusetteNav)
+      Layout.navigations.navbar.push(VolumeNav)
     }
     await App.processPlugins()
     App.setupRoutes()
@@ -146,6 +148,16 @@ const App = {
       if (p.navigation) {
         for (let c of p.navigation) {
           Layout.navigation.add(c)
+        }
+      }
+      if (p.navigations) {
+        for (let [k, v] of Object.entries(p.navigations)) {
+          if (Layout.navigations[k]) {
+            Layout.navigations[k] = [
+              ...Layout.navigations[k],
+              ...v
+            ]
+          }
         }
       }
     }
