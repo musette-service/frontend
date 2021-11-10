@@ -19,7 +19,9 @@ const AlbumsView = {
         }),
         m('.micon.add', {
           onclick: async () => {
-            let targets = MetabaseModel.albums.filter(v=>MetabaseModel.selectedAlbums[v.id])
+            let targets = MetabaseModel.selectedAlbums.map(id => {
+              return MetabaseModel.albums.find(v=>v.id===id)
+            }).filter(v=>v!==null)
             for (let t of targets) {
               let tracks = await MetabaseModel.requestAlbumTracks(t.id)
               MetabaseModel.addTracks(tracks)
@@ -38,7 +40,7 @@ const AlbumsView = {
       }, MetabaseModel.albums.map(v => {
         return m(AlbumView, {
           ...v,
-          selected: MetabaseModel.selectedAlbums[v.id],
+          selected: MetabaseModel.selectedAlbums.find(id=>id===v.id),
           src: MetabaseModel.getAlbumArtURL(v.cover), // TODO: To be adjusted to only specified when onscroll deems the album to be in or have been in view.
           onclick: (id) => {
             MetabaseModel.toggleAlbum(id)

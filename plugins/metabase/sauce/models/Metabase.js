@@ -3,7 +3,7 @@ import m from 'mithril'
 
 const MetabaseModel = {
   albums: [],
-  selectedAlbums: {},
+  selectedAlbums: [],
   init({config, playlist}) {
     MetabaseModel.config = config
     MetabaseModel.playlist = playlist
@@ -28,14 +28,15 @@ const MetabaseModel = {
     return `${MetabaseModel.config.serverAddress}/api/metabase/covers/${id}`
   },
   toggleAlbum(id) {
-    if (MetabaseModel.selectedAlbums[id]) {
-      MetabaseModel.selectedAlbums[id] = false
+    let index = MetabaseModel.selectedAlbums.indexOf(id)
+    if (index >= 0) {
+      MetabaseModel.selectedAlbums.splice(index, 1)
     } else {
-      MetabaseModel.selectedAlbums[id] = true
+      MetabaseModel.selectedAlbums.push(id)
     }
   },
   clearSelectedAlbums() {
-      MetabaseModel.selectedAlbums = {}
+      MetabaseModel.selectedAlbums = []
   },
   // Request to musette.
   addTracks(tracks) {
