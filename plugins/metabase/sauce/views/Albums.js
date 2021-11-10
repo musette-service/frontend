@@ -19,11 +19,8 @@ const AlbumsView = {
         }),
         m('.micon.add', {
           onclick: async () => {
-            let targets = MetabaseModel.selectedAlbums.map(id => {
-              return MetabaseModel.albums.find(v=>v.id===id)
-            }).filter(v=>v!==null)
-            for (let t of targets) {
-              let tracks = await MetabaseModel.requestAlbumTracks(t.id)
+            for (let id of MetabaseModel.selectedAlbums) {
+              let tracks = await MetabaseModel.requestAlbumTracks(id)
               MetabaseModel.addTracks(tracks)
             }
             // Clear old tracks.
