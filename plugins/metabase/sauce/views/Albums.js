@@ -17,6 +17,12 @@ const AlbumsView = {
           onclick: () => {
           }
         }),
+        m('.album-search', [
+          m('input[type=search]', {
+            onchange: e => {
+            }
+          })
+        ]),
         m('.micon.add', {
           onclick: async () => {
             for (let id of MetabaseModel.selectedAlbums) {
@@ -25,7 +31,8 @@ const AlbumsView = {
             }
             // Clear old tracks.
             MetabaseModel.clearSelectedAlbums()
-          }
+          },
+          style: {'float': 'right'}
         })
       ]),
       m('nav.album-items', {
