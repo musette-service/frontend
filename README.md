@@ -1,6 +1,8 @@
 # Musette Frontend
 Herein lies in-progress code for the client frontend for Musette, the remote music player.
 
+![screenshot](screenshot.png)
+
 ## Using
 This software is intended to either be served by the `musette-server` package or by a standalone HTTP server. For the former, point the server's `web_root` value to either the `sauce` directory or the `dist` directory after building the client software.
 
