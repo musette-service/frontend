@@ -114,6 +114,24 @@ nav.navbar, nav.titlebar {
   display: flex;
 }
 
+nav.-left_center_right {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+nav.-left_centerGrow_right {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+nav.-leftGrow_right {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
+}
+
 .navbar-item {
   flex: 1;
   display: flex;
@@ -290,6 +308,8 @@ section.audio-info-art:hover .audio-info-progress {
 
 .audio-info-image {
   max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   flex: 1;
 }
 .audio-info-right {
